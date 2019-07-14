@@ -1,9 +1,6 @@
-#512DuncanL's random web projects
+# 512DuncanL's random web projects
 
-##Games
-
+## Games
 The Lobster Game (Singleplayer) 
-
-##Sites
-
+## Sites
 Mycreeper (A Minecraft guide)
