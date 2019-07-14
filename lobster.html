@@ -34,6 +34,7 @@
         #moneyTotal {
             height: 19px;
         }
+
     </style>
 </head>
 
@@ -465,6 +466,7 @@
                 } else if (inshore == 0 && offshore == 0) {
                     var hurricane;
                     if (random > 4 && season == 1 || random > 3 && season == 2 || random > 2 && season == 3 || random > 3 && season == 4) {
+                        alert("Good Weather");
                         badWeather = 0;
                     } else {
                         alert("Bad Weather");
@@ -487,7 +489,6 @@
                     document.getElementById("traps" + turns).innerHTML = totalTraps;
                     document.getElementById("boats" + turns).innerHTML = totalBoats;
                 } else if (random <= 4 && season == 1) {
-                    //                } else if (random <= 0 && season == 1) {
                     if (badWeather == 3) {
                         alert("Good Weather!");
                         alert("Due to the hurricane warning, you managed to sell your lobsters for 10 dollars each!");
@@ -583,5 +584,8 @@
             document.getElementById("play").style.display = "block";
 
         }
+
     </script>
-</body></html>
+</body>
+
+</html>
