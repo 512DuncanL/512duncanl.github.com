@@ -1,7 +1,5 @@
 Site: [https://512duncanl.github.io](https://512duncanl.github.io)
 
-
-
 # 512DuncanL's random web projects
 
 ## Games
