@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            font-size: 15px;
+            overflow: scroll;
+        }
+
+        table {
+            margin: auto;
+        }
+
+        td,
+        th {
+            border: 1px solid black;
+        }
+
+        table,
+        td {
+            text-align: center;
+        }
+
+        th {
+            max-width: 150px;
+        }
+    </style>
+</head>
+
+<body>
+    <table>
+        <tr>
+            <th></th>
+            <th></th>
+            <th>
+                <h1>THE</h1>
+                <br>
+            </th>
+            <th>
+                <center>
+                    <h1>LOBSTER</h1>
+                    <button id="nextTurn" onclick="nextTurn()">START GAME</button>
+                    <button id="play" onclick="play()" style="display: none">PREPARE TRAPS</button>
+                </center>
+            </th>
+            <th>
+                <h1>GAME</h1>
+                <br>
+            </th>
+            <th></th>
+            <th></th>
+        </tr>
+        <tr>
+            <th><br></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+        </tr>
+        <tr>
+            <th>DAY</th>
+            <th>INSHORE</th>
+            <th>OFFSHORE</th>
+            <th>COSTS</th>
+            <th>MONEY</th>
+            <th>TRAPS</th>
+            <th>BOATS</th>
+        </tr>
+        <tr>
+            <td>MON</td>
+            <td id="inshore1"></td>
+            <td id="offshore1"></td>
+            <td>/</td>
+            <td id="money1"></td>
+            <td id="traps1"></td>
+            <td id="boats1"></td>
+        </tr>
+        <tr>
+            <td>TUE</td>
+            <td id="inshore2"></td>
+            <td id="offshore2"></td>
+            <td>/</td>
+            <td id="money2"></td>
+            <td id="traps2"></td>
+            <td id="boats2"></td>
+        </tr>
+        <tr>
+            <td>WED</td>
+            <td id="inshore3"></td>
+            <td id="offshore3"></td>
+            <td>/</td>
+            <td id="money3"></td>
+            <td id="traps3"></td>
+            <td id="boats3"></td>
+        </tr>
+        <tr>
+            <td>THU</td>
+            <td id="inshore4"></td>
+            <td id="offshore4"></td>
+            <td>/</td>
+            <td id="money4"></td>
+            <td id="traps4"></td>
+            <td id="boats4"></td>
+        </tr>
+        <tr>
+            <td>FRI</td>
+            <td id="inshore5"></td>
+            <td id="offshore5"></td>
+            <td>/</td>
+            <td id="money5"></td>
+            <td id="traps5"></td>
+            <td id="boats5"></td>
+        </tr>
+        <tr>
+            <td>SAT</td>
+            <td>/</td>
+            <td>/</td>
+            <td id="costs6"></td>
+            <td id="money6"></td>
+            <td>/</td>
+            <td>/</td>
+        </tr>
+        <tr>
+            <td>SUN</td>
+            <td>/</td>
+            <td>/</td>
+            <td id="costs7"></td>
+            <td id="money7"></td>
+            <td id="traps7"></td>
+            <td id="boats7"></td>
+        </tr>
+        <tr>
+            <td>MON</td>
+            <td id="inshore8"></td>
+            <td id="offshore8"></td>
+            <td>/</td>
+            <td id="money8"></td>
+            <td id="traps8"></td>
+            <td id="boats8"></td>
+        </tr>
+        <tr>
+            <td>TUE</td>
+            <td id="inshore9"></td>
+            <td id="offshore9"></td>
+            <td>/</td>
+            <td id="money9"></td>
+            <td id="traps9"></td>
+            <td id="boats9"></td>
+        </tr>
+        <tr>
+            <td>WED</td>
+            <td id="inshore10"></td>
+            <td id="offshore10"></td>
+            <td>/</td>
+            <td id="money10"></td>
+            <td id="traps10"></td>
+            <td id="boats10"></td>
+        </tr>
+        <tr>
+            <td>THU</td>
+            <td id="inshore11"></td>
+            <td id="offshore11"></td>
+            <td>/</td>
+            <td id="money11"></td>
+            <td id="traps11"></td>
+            <td id="boats11"></td>
+        </tr>
+        <tr>
+            <td>FRI</td>
+            <td id="inshore12"></td>
+            <td id="offshore12"></td>
+            <td>/</td>
+            <td id="money12"></td>
+            <td id="traps12"></td>
+            <td id="boats12"></td>
+        </tr>
+        <tr>
+            <td>SAT</td>
+            <td>/</td>
+            <td>/</td>
+            <td id="costs13"></td>
+            <td id="money13"></td>
+            <td>/</td>
+            <td>/</td>
+        </tr>
+        <tr>
+            <td>SUN</td>
+            <td>/</td>
+            <td>/</td>
+            <td id="costs14"></td>
+            <td id="money14"></td>
+            <td id="traps14"></td>
+            <td id="boats14"></td>
+        </tr>
+        <tr>
+            <td>MON</td>
+            <td id="inshore15"></td>
+            <td id="offshore15"></td>
+            <td>/</td>
+            <td id="money15"></td>
+            <td id="traps15"></td>
+            <td id="boats15"></td>
+        </tr>
+        <tr>
+            <td>TUE</td>
+            <td id="inshore16"></td>
+            <td id="offshore16"></td>
+            <td>/</td>
+            <td id="money16"></td>
+            <td id="traps16"></td>
+            <td id="boats16"></td>
+        </tr>
+        <tr>
+            <td>WED</td>
+            <td id="inshore17"></td>
+            <td id="offshore17"></td>
+            <td>/</td>
+            <td id="money17"></td>
+            <td id="traps17"></td>
+            <td id="boats17"></td>
+        </tr>
+        <tr>
+            <td>THU</td>
+            <td id="inshore18"></td>
+            <td id="offshore18"></td>
+            <td>/</td>
+            <td id="money18"></td>
+            <td id="traps18"></td>
+            <td id="boats18"></td>
+        </tr>
+        <tr>
+            <td>FRI</td>
+            <td id="inshore19"></td>
+            <td id="offshore19"></td>
+            <td>/</td>
+            <td id="money19"></td>
+            <td id="traps19"></td>
+            <td id="boats19"></td>
+        </tr>
+        <tr>
+            <td>SAT</td>
+            <td>/</td>
+            <td>/</td>
+            <td id="costs20"></td>
+            <td id="money20"></td>
+            <td>/</td>
+            <td>/</td>
+        </tr>
+        <tr>
+            <td>SUN</td>
+            <td>/</td>
+            <td>/</td>
+            <td id="costs21"></td>
+            <td id="money21"></td>
+            <td id="traps21"></td>
+            <td id="boats21"></td>
+        </tr>
+        <tr>
+            <td>MON</td>
+            <td id="inshore22"></td>
+            <td id="offshore22"></td>
+            <td>/</td>
+            <td id="money22"></td>
+            <td id="traps22"></td>
+            <td id="boats22"></td>
+        </tr>
+        <tr>
+            <td>TUE</td>
+            <td id="inshore23"></td>
+            <td id="offshore23"></td>
+            <td>/</td>
+            <td id="money23"></td>
+            <td id="traps23"></td>
+            <td id="boats9"></td>
+        </tr>
+        <tr>
+            <td>WED</td>
+            <td id="inshore24"></td>
+            <td id="offshore24"></td>
+            <td>/</td>
+            <td id="money24"></td>
+            <td id="traps24"></td>
+            <td id="boats24"></td>
+        </tr>
+        <tr>
+            <td>THU</td>
+            <td id="inshore25"></td>
+            <td id="offshore25"></td>
+            <td>/</td>
+            <td id="money25"></td>
+            <td id="traps25"></td>
+            <td id="boats25"></td>
+        </tr>
+        <tr>
+            <td>FRI</td>
+            <td id="inshore26"></td>
+            <td id="offshore26"></td>
+            <td>/</td>
+            <td id="money26"></td>
+            <td id="traps26"></td>
+            <td id="boats26"></td>
+        </tr>
+        <tr>
+            <td>SAT</td>
+            <td>/</td>
+            <td>/</td>
+            <td id="costs27"></td>
+            <td id="money27"></td>
+            <td>/</td>
+            <td>/</td>
+        </tr>
+        <tr>
+            <td>SUN</td>
+            <td>/</td>
+            <td>/</td>
+            <td id="costs28"></td>
+            <td id="money28"></td>
+            <td id="traps28"></td>
+            <td id="boats28"></td>
+        </tr>
+        <tr>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th>
+                <h2>END OF GAME</h2>
+            </th>
+            <th></th>
+            <th></th>
+            <th></th>
+        </tr>
+        <tr>
+            <th></th>
+            <th>MONEY(CASH)</th>
+            <th></th>
+            <th>MONEY(ASSETS)</th>
+            <th></th>
+            <th>MONEY(TOTAL)</th>
+            <th></th>
+
+        </tr>
+        <tr>
+            <td>
+                <p> </p>
+            </td>
+            <td id="moneyCash"></td>
+            <td></td>
+            <td id="moneyAssets"></td>
+            <td></td>
+            <td id="moneyTotal"></td>
+            <th></th>
+        </tr>
+    </table>
+    <table>
+    </table>
+    <script>
+        var inshore = undefined;
+        var offshore = undefined;
+        var totalTraps = 6;
+        var totalTypedTraps = undefined;
+        var totalBoats = 1;
+        var totalDamagedBoats = 0;
+        var money = 60;
+        var costs = 0;
+        var season = 1;
+        var turns = 0;
+        var day = 0;
+        var badWeather = 0;
+        var assets;
+
+        function play() {
+            if (turns == 15) {
+                alert(money);
+                assets = (totalTraps * 2) + (30 * totalBoats) + (totalBoats * 10 * (Math.floor(Math.random() * 6)));
+                alert("The game has ended. Your assets will be sold and added to your balance. You currently have " + money + " dollars in cash and " + assets + " dollars worth of assets, which added together makes a total of " + (money + assets) + " dollars.")
+            } else if (day <= 5) {
+                alert("You currently have " + totalTraps + " traps and " + totalBoats + " boats. Your current balance is " + money + " dollars. If you want to, you can use 0 traps and work in the hotel for 15 dollars.");
+
+                inshore = prompt("How many traps do you want to place inshore?", "")
+                while (inshore == "" || isNaN(inshore) == true) {
+                    alert("Please enter a number");
+                    inshore = prompt("How many traps do you want to place inshore?", "");
+                }
+                offshore = prompt("How many traps do you want to place offshore?", "");
+                while (offshore == "" || isNaN(offshore) == true) {
+                    alert("Please enter a number");
+                    offshore = prompt("How many traps do you want to place offshore?", "");
+                }
+
+                inshore = parseInt(inshore, 10)
+                offshore = parseInt(offshore, 10)
+
+                totalTypedTraps = inshore + offshore;
+
+                //If problem...
+                while (totalTypedTraps > totalTraps || totalTypedTraps > totalBoats * 10) {
+                    if (totalTypedTraps > totalTraps) {
+                        alert("Not enough traps")
+                        inshore = prompt("How many traps do you want to place inshore?", "")
+                        while (inshore == "" || isNaN(inshore) == true) {
+                            alert("Please enter a number");
+                            inshore = prompt("How many traps do you want to place inshore?", "");
+                        }
+                        offshore = prompt("How many traps do you want to place offshore?", "");
+                        while (offshore == "" || isNaN(offshore) == true) {
+                            alert("Please enter a number");
+                            offshore = prompt("How many traps do you want to place offshore?", "");
+                        }
+
+                        inshore = parseInt(inshore, 10)
+                        offshore = parseInt(offshore, 10)
+
+                        totalTypedTraps = inshore + offshore;
+
+                    } else if (totalTypedTraps > totalBoats * 10) {
+                        alert("Not enough boats to carry traps");
+                        inshore = prompt("How many traps do you want to place inshore?", "")
+                        while (inshore == "" || isNaN(inshore) == true) {
+                            alert("Please enter a number");
+                            inshore = prompt("How many traps do you want to place inshore?", "");
+                        }
+                        offshore = prompt("How many traps do you want to place offshore?", "");
+                        while (offshore == "" || isNaN(offshore) == true) {
+                            alert("Please enter a number");
+                            offshore = prompt("How many traps do you want to place offshore?", "");
+                        }
+
+                        inshore = parseInt(inshore, 10)
+                        offshore = parseInt(offshore, 10)
+
+                        totalTypedTraps = inshore + offshore;
+                    }
+                }
+                document.getElementById("inshore" + turns).innerHTML = inshore;
+                document.getElementById("offshore" + turns).innerHTML = offshore;
+            } else if (day == 6) {
+                money -= totalBoats * 20 + 30 + totalDamagedBoats * 30;
+                costs += totalBoats * 20 + 30 + totalDamagedBoats * 30;
+                if (totalDamagedBoats > 0 == true) {
+                    alert(totalBoats * 20 + " dollars(cost of boat maintanance), 30 dollars(living costs), and " + totalDamagedBoats * 30 + " dollars(boat repairs) have been deducted from your balance. Your current balance is " + money + " dollars.");
+                    totalBoats += totalDamagedBoats;
+                    totalDamagedBoats = 0;
+                } else {
+                    alert(totalBoats * 20 + " dollars(cost of boat maintanance) and 30 dollars(living costs) have been deducted from your balance. Your current balance is " + money + " dollars.");
+                }
+            } else if (day == 7) {
+                var random = 4 + (Math.floor(Math.random() * 6));
+                var x;
+                var y;
+                alert("Today is market day, you may buy boats or traps here. Traps cost " + random + " dollars, boats cost 100 dollars each. You currently have " + totalTraps + " trap(s) and " + totalBoats + " boat(s). One boat can store a maximum of 10 traps.");
+                //Boats
+                y = parseInt(prompt("How many boats would you like to buy?"), 10);
+                while (isNaN(totalBoats) == true || y * 100 > money) {
+                    if (isNaN(totalBoats) == true) {
+                        alert("Please enter a number");
+                        y = parseInt(prompt("How many boats would you like to buy?"), 10);
+                    } else if (y * 100 > money) {
+                        alert("You do not have enough money!")
+                        y = parseInt(prompt("How many boats would you like to buy?"), 10);
+                    }
+                }
+                totalBoats += y;
+                money -= y * 100;
+                costs += y * 100;
+
+                //Traps
+                x = parseInt(prompt("How many traps would you like to buy?"), 10);
+                while (isNaN(totalTraps) == true || x * random > money) {
+                    if (isNaN(totalTraps) == true) {
+                        alert("Please enter a number");
+                        x = parseInt(prompt("How many traps would you like to buy?"), 10);
+                    } else if (x * random > money) {
+                        alert("You do not have enough money!")
+                        x = parseInt(prompt("How many traps would you like to buy?"), 10);
+                    }
+                }
+                totalTraps += x;
+                money -= x * random;
+                costs += x * random;
+            }
+            document.getElementById("nextTurn").style.display = "block";
+            document.getElementById("play").style.display = "none";
+        }
+
+        function nextTurn() {
+            var random = (Math.floor(Math.random() * 6));
+            if (turns == 8) {
+                document.getElementById("moneyCash").innerHTML = money;
+                document.getElementById("moneyAssets").innerHTML = assets;
+                document.getElementById("moneyTotal").innerHTML = assets + money;
+            } else if (day < 6) {
+                document.getElementById("nextTurn").innerHTML = "ROLL DICE";
+                if (inshore == undefined && offshore == undefined) {
+                    money = 60;
+                } else if (inshore == 0 && offshore == 0) {
+                    var hurricane;
+                    if (random > 4 && season == 1 || random > 3 && season == 2 || random > 2 && season == 3 || random > 3 && season == 4) {
+                        badWeather = 0;
+                    } else {
+                        alert("Bad Weather");
+                        badWeather += 1;
+                        if (badWeather == 3) {
+                            badWeather = 0;
+                            hurricane = true;
+                        }
+                    }
+                    if (hurricane == true) {
+                        alert("As you were working, a hurricane came and damaged your boat(s). A fee of 30 dollars for repairing your boat(s) will be applied on Saturday. You may not take damaged boats out to sea.");
+                        money += 15;
+                        totalDamagedBoats += totalBoats;
+                        totalBoats -= totalBoats;
+                    } else {
+                        money += 15;
+                        alert("You worked at the hotel!");
+                    }
+                    document.getElementById("money" + turns).innerHTML = money;
+                    document.getElementById("traps" + turns).innerHTML = totalTraps;
+                    document.getElementById("boats" + turns).innerHTML = totalBoats;
+                } else if (random <= 4 && season == 1) {
+                    //                } else if (random <= 0 && season == 1) {
+                    if (badWeather == 3) {
+                        alert("Good Weather!");
+                        alert("Due to the hurricane warning, you managed to sell your lobsters for 10 dollars each!");
+                        money += (offshore + inshore) * 10;
+                    } else {
+                        alert("Good Weather!");
+                        money += offshore * 5 + inshore * 3;
+                    }
+                    document.getElementById("money" + turns).innerHTML = money;
+                    document.getElementById("traps" + turns).innerHTML = totalTraps;
+                    document.getElementById("boats" + turns).innerHTML = totalBoats;
+                } else if (random <= 3 && season == 2 || random <= 3 && season == 4) {
+
+                    if (badWeather == 3) {
+                        alert("Good Weather!");
+                        alert("Due to the hurricane warning, you managed to sell your lobsters for 10 dollars each!");
+                        money += (offshore + inshore) * 10;
+                    } else {
+                        alert("Good Weather!");
+                        money += offshore * 5 + inshore * 3;
+                    }
+                    document.getElementById("money" + turns).innerHTML = money;
+                    document.getElementById("traps" + turns).innerHTML = totalTraps;
+                    document.getElementById("boats" + turns).innerHTML = totalBoats;
+                } else if (random <= 2 && season == 3) {
+
+                    if (badWeather == 3) {
+                        alert("Good Weather!");
+                        alert("Due to the hurricane warning, you managed to sell your lobsters for 10 dollars each!");
+                        money += (offshore + inshore) * 10;
+                    } else {
+                        alert("Good Weather!");
+                        money += offshore * 5 + inshore * 3;
+                    }
+                    document.getElementById("money" + turns).innerHTML = money;
+                    document.getElementById("traps" + turns).innerHTML = totalTraps;
+                    document.getElementById("boats" + turns).innerHTML = totalBoats;
+                } else {
+                    badWeather += 1;
+                    if (badWeather == 3) {
+                        alert("Hurricane!!!");
+                        alert("The hurricane has swept your boats and traps that were at sea!");
+                        totalBoats -= Math.ceil((inshore + offshore) / 10);
+                        totalTraps -= inshore + offshore;
+                        badWeather = 0;
+                    } else {
+                        money += inshore * 5;
+                        totalTraps -= offshore;
+                        alert("Bad Weather!");
+                    }
+                    document.getElementById("money" + turns).innerHTML = money;
+                    document.getElementById("traps" + turns).innerHTML = totalTraps;
+                    document.getElementById("boats" + turns).innerHTML = totalBoats;
+                }
+
+            } else if (day == 6) {
+                document.getElementById("money" + turns).innerHTML = money;
+                document.getElementById("costs" + turns).innerHTML = costs;
+            } else if (day == 7) {
+
+                //Season Changing (1 = Summer, 2 = Fall, 3 = Winter, 4 = Spring)
+                if (season == 4) {
+                    season = 1;
+                    alert("The season has changed! It is summer!");
+                } else {
+                    season += 1;
+                    if (season == 2) {
+                        alert("The season has changed! It is fall!");
+                    } else if (season == 3) {
+                        alert("The season has changed! It is winter!");
+                    } else {
+                        alert("The season has changed! It is spring!");
+                    }
+                }
+
+                document.getElementById("costs" + turns).innerHTML = costs;
+                document.getElementById("money" + turns).innerHTML = money;
+                document.getElementById("traps" + turns).innerHTML = totalTraps;
+                document.getElementById("boats" + turns).innerHTML = totalBoats;
+            }
+            turns += 1;
+
+            if (day == 7) {
+                day = 1;
+            } else {
+                day += 1;
+            }
+
+            inshore = undefined;
+            offshore = undefined;
+            costs = 0;
+            document.getElementById("nextTurn").style.display = "none";
+            document.getElementById("play").style.display = "block";
+
+        }
+    </script>
+</body></html>
