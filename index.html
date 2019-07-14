@@ -7,6 +7,7 @@
             font-family: Arial, sans-serif;
             font-size: 15px;
             overflow: scroll;
+            text-align: center;
         }
 
         table {
@@ -16,6 +17,7 @@
         td,
         th {
             border: 1px solid black;
+            padding: 5px;
         }
 
         table,
@@ -26,337 +28,301 @@
         th {
             max-width: 150px;
         }
+
+        #moneyCash,
+        #moneyAssets,
+        #moneyTotal {
+            height: 19px;
+        }
     </style>
 </head>
 
 <body>
-    <table>
-        <tr>
-            <th></th>
-            <th></th>
-            <th>
-                <h1>THE</h1>
-                <br>
-            </th>
-            <th>
-                <center>
-                    <h1>LOBSTER</h1>
-                    <button id="nextTurn" onclick="nextTurn()">START GAME</button>
-                    <button id="play" onclick="play()" style="display: none">PREPARE TRAPS</button>
-                </center>
-            </th>
-            <th>
-                <h1>GAME</h1>
-                <br>
-            </th>
-            <th></th>
-            <th></th>
-        </tr>
-        <tr>
-            <th><br></th>
-            <th></th>
-            <th></th>
-            <th></th>
-            <th></th>
-            <th></th>
-            <th></th>
-        </tr>
-        <tr>
-            <th>DAY</th>
-            <th>INSHORE</th>
-            <th>OFFSHORE</th>
-            <th>COSTS</th>
-            <th>MONEY</th>
-            <th>TRAPS</th>
-            <th>BOATS</th>
-        </tr>
-        <tr>
-            <td>MON</td>
-            <td id="inshore1"></td>
-            <td id="offshore1"></td>
-            <td>/</td>
-            <td id="money1"></td>
-            <td id="traps1"></td>
-            <td id="boats1"></td>
-        </tr>
-        <tr>
-            <td>TUE</td>
-            <td id="inshore2"></td>
-            <td id="offshore2"></td>
-            <td>/</td>
-            <td id="money2"></td>
-            <td id="traps2"></td>
-            <td id="boats2"></td>
-        </tr>
-        <tr>
-            <td>WED</td>
-            <td id="inshore3"></td>
-            <td id="offshore3"></td>
-            <td>/</td>
-            <td id="money3"></td>
-            <td id="traps3"></td>
-            <td id="boats3"></td>
-        </tr>
-        <tr>
-            <td>THU</td>
-            <td id="inshore4"></td>
-            <td id="offshore4"></td>
-            <td>/</td>
-            <td id="money4"></td>
-            <td id="traps4"></td>
-            <td id="boats4"></td>
-        </tr>
-        <tr>
-            <td>FRI</td>
-            <td id="inshore5"></td>
-            <td id="offshore5"></td>
-            <td>/</td>
-            <td id="money5"></td>
-            <td id="traps5"></td>
-            <td id="boats5"></td>
-        </tr>
-        <tr>
-            <td>SAT</td>
-            <td>/</td>
-            <td>/</td>
-            <td id="costs6"></td>
-            <td id="money6"></td>
-            <td>/</td>
-            <td>/</td>
-        </tr>
-        <tr>
-            <td>SUN</td>
-            <td>/</td>
-            <td>/</td>
-            <td id="costs7"></td>
-            <td id="money7"></td>
-            <td id="traps7"></td>
-            <td id="boats7"></td>
-        </tr>
-        <tr>
-            <td>MON</td>
-            <td id="inshore8"></td>
-            <td id="offshore8"></td>
-            <td>/</td>
-            <td id="money8"></td>
-            <td id="traps8"></td>
-            <td id="boats8"></td>
-        </tr>
-        <tr>
-            <td>TUE</td>
-            <td id="inshore9"></td>
-            <td id="offshore9"></td>
-            <td>/</td>
-            <td id="money9"></td>
-            <td id="traps9"></td>
-            <td id="boats9"></td>
-        </tr>
-        <tr>
-            <td>WED</td>
-            <td id="inshore10"></td>
-            <td id="offshore10"></td>
-            <td>/</td>
-            <td id="money10"></td>
-            <td id="traps10"></td>
-            <td id="boats10"></td>
-        </tr>
-        <tr>
-            <td>THU</td>
-            <td id="inshore11"></td>
-            <td id="offshore11"></td>
-            <td>/</td>
-            <td id="money11"></td>
-            <td id="traps11"></td>
-            <td id="boats11"></td>
-        </tr>
-        <tr>
-            <td>FRI</td>
-            <td id="inshore12"></td>
-            <td id="offshore12"></td>
-            <td>/</td>
-            <td id="money12"></td>
-            <td id="traps12"></td>
-            <td id="boats12"></td>
-        </tr>
-        <tr>
-            <td>SAT</td>
-            <td>/</td>
-            <td>/</td>
-            <td id="costs13"></td>
-            <td id="money13"></td>
-            <td>/</td>
-            <td>/</td>
-        </tr>
-        <tr>
-            <td>SUN</td>
-            <td>/</td>
-            <td>/</td>
-            <td id="costs14"></td>
-            <td id="money14"></td>
-            <td id="traps14"></td>
-            <td id="boats14"></td>
-        </tr>
-        <tr>
-            <td>MON</td>
-            <td id="inshore15"></td>
-            <td id="offshore15"></td>
-            <td>/</td>
-            <td id="money15"></td>
-            <td id="traps15"></td>
-            <td id="boats15"></td>
-        </tr>
-        <tr>
-            <td>TUE</td>
-            <td id="inshore16"></td>
-            <td id="offshore16"></td>
-            <td>/</td>
-            <td id="money16"></td>
-            <td id="traps16"></td>
-            <td id="boats16"></td>
-        </tr>
-        <tr>
-            <td>WED</td>
-            <td id="inshore17"></td>
-            <td id="offshore17"></td>
-            <td>/</td>
-            <td id="money17"></td>
-            <td id="traps17"></td>
-            <td id="boats17"></td>
-        </tr>
-        <tr>
-            <td>THU</td>
-            <td id="inshore18"></td>
-            <td id="offshore18"></td>
-            <td>/</td>
-            <td id="money18"></td>
-            <td id="traps18"></td>
-            <td id="boats18"></td>
-        </tr>
-        <tr>
-            <td>FRI</td>
-            <td id="inshore19"></td>
-            <td id="offshore19"></td>
-            <td>/</td>
-            <td id="money19"></td>
-            <td id="traps19"></td>
-            <td id="boats19"></td>
-        </tr>
-        <tr>
-            <td>SAT</td>
-            <td>/</td>
-            <td>/</td>
-            <td id="costs20"></td>
-            <td id="money20"></td>
-            <td>/</td>
-            <td>/</td>
-        </tr>
-        <tr>
-            <td>SUN</td>
-            <td>/</td>
-            <td>/</td>
-            <td id="costs21"></td>
-            <td id="money21"></td>
-            <td id="traps21"></td>
-            <td id="boats21"></td>
-        </tr>
-        <tr>
-            <td>MON</td>
-            <td id="inshore22"></td>
-            <td id="offshore22"></td>
-            <td>/</td>
-            <td id="money22"></td>
-            <td id="traps22"></td>
-            <td id="boats22"></td>
-        </tr>
-        <tr>
-            <td>TUE</td>
-            <td id="inshore23"></td>
-            <td id="offshore23"></td>
-            <td>/</td>
-            <td id="money23"></td>
-            <td id="traps23"></td>
-            <td id="boats9"></td>
-        </tr>
-        <tr>
-            <td>WED</td>
-            <td id="inshore24"></td>
-            <td id="offshore24"></td>
-            <td>/</td>
-            <td id="money24"></td>
-            <td id="traps24"></td>
-            <td id="boats24"></td>
-        </tr>
-        <tr>
-            <td>THU</td>
-            <td id="inshore25"></td>
-            <td id="offshore25"></td>
-            <td>/</td>
-            <td id="money25"></td>
-            <td id="traps25"></td>
-            <td id="boats25"></td>
-        </tr>
-        <tr>
-            <td>FRI</td>
-            <td id="inshore26"></td>
-            <td id="offshore26"></td>
-            <td>/</td>
-            <td id="money26"></td>
-            <td id="traps26"></td>
-            <td id="boats26"></td>
-        </tr>
-        <tr>
-            <td>SAT</td>
-            <td>/</td>
-            <td>/</td>
-            <td id="costs27"></td>
-            <td id="money27"></td>
-            <td>/</td>
-            <td>/</td>
-        </tr>
-        <tr>
-            <td>SUN</td>
-            <td>/</td>
-            <td>/</td>
-            <td id="costs28"></td>
-            <td id="money28"></td>
-            <td id="traps28"></td>
-            <td id="boats28"></td>
-        </tr>
-        <tr>
-            <th></th>
-            <th></th>
-            <th></th>
-            <th>
-                <h2>END OF GAME</h2>
-            </th>
-            <th></th>
-            <th></th>
-            <th></th>
-        </tr>
-        <tr>
-            <th></th>
-            <th>MONEY(CASH)</th>
-            <th></th>
-            <th>MONEY(ASSETS)</th>
-            <th></th>
-            <th>MONEY(TOTAL)</th>
-            <th></th>
+    <div>
+        <h1>THE LOBSTER GAME</h1>
+        <center>
+            <button id="nextTurn" onclick="nextTurn()">START GAME</button>
+            <button id="play" onclick="play()" style="display: none">PREPARE TRAPS</button>
+        </center>
+        <br>
+        <table>
+            <tr>
+                <th>DAY</th>
+                <th>INSHORE</th>
+                <th>OFFSHORE</th>
+                <th>COSTS</th>
+                <th>MONEY</th>
+                <th>TRAPS</th>
+                <th>BOATS</th>
+            </tr>
+            <tr>
+                <td>MON</td>
+                <td id="inshore1"></td>
+                <td id="offshore1"></td>
+                <td>/</td>
+                <td id="money1"></td>
+                <td id="traps1"></td>
+                <td id="boats1"></td>
+            </tr>
+            <tr>
+                <td>TUE</td>
+                <td id="inshore2"></td>
+                <td id="offshore2"></td>
+                <td>/</td>
+                <td id="money2"></td>
+                <td id="traps2"></td>
+                <td id="boats2"></td>
+            </tr>
+            <tr>
+                <td>WED</td>
+                <td id="inshore3"></td>
+                <td id="offshore3"></td>
+                <td>/</td>
+                <td id="money3"></td>
+                <td id="traps3"></td>
+                <td id="boats3"></td>
+            </tr>
+            <tr>
+                <td>THU</td>
+                <td id="inshore4"></td>
+                <td id="offshore4"></td>
+                <td>/</td>
+                <td id="money4"></td>
+                <td id="traps4"></td>
+                <td id="boats4"></td>
+            </tr>
+            <tr>
+                <td>FRI</td>
+                <td id="inshore5"></td>
+                <td id="offshore5"></td>
+                <td>/</td>
+                <td id="money5"></td>
+                <td id="traps5"></td>
+                <td id="boats5"></td>
+            </tr>
+            <tr>
+                <td>SAT</td>
+                <td>/</td>
+                <td>/</td>
+                <td id="costs6"></td>
+                <td id="money6"></td>
+                <td>/</td>
+                <td>/</td>
+            </tr>
+            <tr>
+                <td>SUN</td>
+                <td>/</td>
+                <td>/</td>
+                <td id="costs7"></td>
+                <td id="money7"></td>
+                <td id="traps7"></td>
+                <td id="boats7"></td>
+            </tr>
+            <tr>
+                <td>MON</td>
+                <td id="inshore8"></td>
+                <td id="offshore8"></td>
+                <td>/</td>
+                <td id="money8"></td>
+                <td id="traps8"></td>
+                <td id="boats8"></td>
+            </tr>
+            <tr>
+                <td>TUE</td>
+                <td id="inshore9"></td>
+                <td id="offshore9"></td>
+                <td>/</td>
+                <td id="money9"></td>
+                <td id="traps9"></td>
+                <td id="boats9"></td>
+            </tr>
+            <tr>
+                <td>WED</td>
+                <td id="inshore10"></td>
+                <td id="offshore10"></td>
+                <td>/</td>
+                <td id="money10"></td>
+                <td id="traps10"></td>
+                <td id="boats10"></td>
+            </tr>
+            <tr>
+                <td>THU</td>
+                <td id="inshore11"></td>
+                <td id="offshore11"></td>
+                <td>/</td>
+                <td id="money11"></td>
+                <td id="traps11"></td>
+                <td id="boats11"></td>
+            </tr>
+            <tr>
+                <td>FRI</td>
+                <td id="inshore12"></td>
+                <td id="offshore12"></td>
+                <td>/</td>
+                <td id="money12"></td>
+                <td id="traps12"></td>
+                <td id="boats12"></td>
+            </tr>
+            <tr>
+                <td>SAT</td>
+                <td>/</td>
+                <td>/</td>
+                <td id="costs13"></td>
+                <td id="money13"></td>
+                <td>/</td>
+                <td>/</td>
+            </tr>
+            <tr>
+                <td>SUN</td>
+                <td>/</td>
+                <td>/</td>
+                <td id="costs14"></td>
+                <td id="money14"></td>
+                <td id="traps14"></td>
+                <td id="boats14"></td>
+            </tr>
+            <tr>
+                <td>MON</td>
+                <td id="inshore15"></td>
+                <td id="offshore15"></td>
+                <td>/</td>
+                <td id="money15"></td>
+                <td id="traps15"></td>
+                <td id="boats15"></td>
+            </tr>
+            <tr>
+                <td>TUE</td>
+                <td id="inshore16"></td>
+                <td id="offshore16"></td>
+                <td>/</td>
+                <td id="money16"></td>
+                <td id="traps16"></td>
+                <td id="boats16"></td>
+            </tr>
+            <tr>
+                <td>WED</td>
+                <td id="inshore17"></td>
+                <td id="offshore17"></td>
+                <td>/</td>
+                <td id="money17"></td>
+                <td id="traps17"></td>
+                <td id="boats17"></td>
+            </tr>
+            <tr>
+                <td>THU</td>
+                <td id="inshore18"></td>
+                <td id="offshore18"></td>
+                <td>/</td>
+                <td id="money18"></td>
+                <td id="traps18"></td>
+                <td id="boats18"></td>
+            </tr>
+            <tr>
+                <td>FRI</td>
+                <td id="inshore19"></td>
+                <td id="offshore19"></td>
+                <td>/</td>
+                <td id="money19"></td>
+                <td id="traps19"></td>
+                <td id="boats19"></td>
+            </tr>
+            <tr>
+                <td>SAT</td>
+                <td>/</td>
+                <td>/</td>
+                <td id="costs20"></td>
+                <td id="money20"></td>
+                <td>/</td>
+                <td>/</td>
+            </tr>
+            <tr>
+                <td>SUN</td>
+                <td>/</td>
+                <td>/</td>
+                <td id="costs21"></td>
+                <td id="money21"></td>
+                <td id="traps21"></td>
+                <td id="boats21"></td>
+            </tr>
+            <tr>
+                <td>MON</td>
+                <td id="inshore22"></td>
+                <td id="offshore22"></td>
+                <td>/</td>
+                <td id="money22"></td>
+                <td id="traps22"></td>
+                <td id="boats22"></td>
+            </tr>
+            <tr>
+                <td>TUE</td>
+                <td id="inshore23"></td>
+                <td id="offshore23"></td>
+                <td>/</td>
+                <td id="money23"></td>
+                <td id="traps23"></td>
+                <td id="boats9"></td>
+            </tr>
+            <tr>
+                <td>WED</td>
+                <td id="inshore24"></td>
+                <td id="offshore24"></td>
+                <td>/</td>
+                <td id="money24"></td>
+                <td id="traps24"></td>
+                <td id="boats24"></td>
+            </tr>
+            <tr>
+                <td>THU</td>
+                <td id="inshore25"></td>
+                <td id="offshore25"></td>
+                <td>/</td>
+                <td id="money25"></td>
+                <td id="traps25"></td>
+                <td id="boats25"></td>
+            </tr>
+            <tr>
+                <td>FRI</td>
+                <td id="inshore26"></td>
+                <td id="offshore26"></td>
+                <td>/</td>
+                <td id="money26"></td>
+                <td id="traps26"></td>
+                <td id="boats26"></td>
+            </tr>
+            <tr>
+                <td>SAT</td>
+                <td>/</td>
+                <td>/</td>
+                <td id="costs27"></td>
+                <td id="money27"></td>
+                <td>/</td>
+                <td>/</td>
+            </tr>
+            <tr>
+                <td>SUN</td>
+                <td>/</td>
+                <td>/</td>
+                <td id="costs28"></td>
+                <td id="money28"></td>
+                <td id="traps28"></td>
+                <td id="boats28"></td>
+            </tr>
+        </table>
+        <h2>END OF GAME</h2>
+        <table>
+            <tr>
+                <th>MONEY(CASH)</th>
+                <th>MONEY(ASSETS)</th>
+                <th>MONEY(TOTAL)</th>
+            </tr>
+            <tr>
 
-        </tr>
-        <tr>
-            <td>
-                <p> </p>
-            </td>
-            <td id="moneyCash"></td>
-            <td></td>
-            <td id="moneyAssets"></td>
-            <td></td>
-            <td id="moneyTotal"></td>
-            <th></th>
-        </tr>
-    </table>
-    <table>
-    </table>
+                <td id="moneyCash"></td>
+                <td id="moneyAssets"></td>
+                <td id="moneyTotal"></td>
+            </tr>
+        </table>
+    </div>
     <script>
         var inshore = undefined;
         var offshore = undefined;
