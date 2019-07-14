@@ -339,11 +339,11 @@
         var assets;
 
         function play() {
-            if (turns == 15) {
+            if (turns == 29) {
                 alert(money);
                 assets = (totalTraps * 2) + (30 * totalBoats) + (totalBoats * 10 * (Math.floor(Math.random() * 6)));
                 alert("The game has ended. Your assets will be sold and added to your balance. You currently have " + money + " dollars in cash and " + assets + " dollars worth of assets, which added together makes a total of " + (money + assets) + " dollars.")
-            } else if (day <= 5) {
+            } else if (day != 6 || day != 7 || day != 13 || day != 14 || day != 20 || day != 21 || day != 21 || day != 28) {
                 alert("You currently have " + totalTraps + " traps and " + totalBoats + " boats. Your current balance is " + money + " dollars. If you want to, you can use 0 traps and work in the hotel for 15 dollars.");
 
                 inshore = prompt("How many traps do you want to place inshore?", "")
@@ -403,7 +403,7 @@
                 }
                 document.getElementById("inshore" + turns).innerHTML = inshore;
                 document.getElementById("offshore" + turns).innerHTML = offshore;
-            } else if (day == 6) {
+            } else if (day == 6 || day == 13 || day == 20 || day == 27) {
                 money -= totalBoats * 20 + 30 + totalDamagedBoats * 30;
                 costs += totalBoats * 20 + 30 + totalDamagedBoats * 30;
                 if (totalDamagedBoats > 0 == true) {
@@ -413,7 +413,7 @@
                 } else {
                     alert(totalBoats * 20 + " dollars(cost of boat maintanance) and 30 dollars(living costs) have been deducted from your balance. Your current balance is " + money + " dollars.");
                 }
-            } else if (day == 7) {
+            } else if (day == 7 || day == 14 || day == 21 || day == 28) {
                 var random = 4 + (Math.floor(Math.random() * 6));
                 var x;
                 var y;
@@ -487,6 +487,7 @@
                     document.getElementById("traps" + turns).innerHTML = totalTraps;
                     document.getElementById("boats" + turns).innerHTML = totalBoats;
                 } else if (random <= 4 && season == 1) {
+                    //                } else if (random <= 0 && season == 1) {
                     if (badWeather == 3) {
                         alert("Good Weather!");
                         alert("Due to the hurricane warning, you managed to sell your lobsters for 10 dollars each!");
