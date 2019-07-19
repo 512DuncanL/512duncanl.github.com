@@ -1,0 +1,141 @@
+<html>
+
+<head>
+    <style>
+        body {
+            text-align: center;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            -ms-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%);
+        }
+
+        button {
+            cursor: pointer;
+        }
+
+        #clickDiv {
+            background-color: lightgray;
+            width: 60vw;
+            height: 30vh;
+            position: relative;
+            cursor: pointer;
+        }
+
+        #divText {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            -ms-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%);
+        }
+
+        #next {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Clicking Speed Test</h1>
+    <div id="div">
+        <p>Testing Time:</p>
+        <button id="5sec" onclick="setTime5()">5 SECONDS</button>
+        <button id="10sec" onclick="setTime10()">10 SECONDS</button>
+        <button id="20sec" onclick="setTime20()">20 SECONDS</button>
+    </div>
+    <br>
+    <div style="text-align: center">
+        <p>Clicks: <span id="clicks">0</span></p>
+        <p>Time Remaining: <span id="timeRemaining">5</span> Seconds</p>
+        <p>CPS: <span id="CPS"></span></p>
+        <p>High Score: <span id="highScore">0</span> CPS</p>
+        <div onclick="onClick()" id="clickDiv">
+            <p id="divText">Click here</p>
+        </div>
+        <br>
+        <br>
+        <button id="start" onclick="start()">START</button>
+        <button id="next" onclick="next()">NEXT</button>
+    </div>
+    <script>
+        var startTime = 5;
+        var clicks = 0;
+        var timeRemaining;
+        var CPS;
+        var timing = false;
+        var testComplete = false;
+        var highScore = 0;
+
+        function setTime5() {
+            if (testComplete == true) {
+                startTime = 5;
+                document.getElementById("timeRemaining").innerHTML = startTime;
+            }
+        }
+
+        function setTime10() {
+            if (testComplete == true) {
+                startTime = 10;
+                document.getElementById("timeRemaining").innerHTML = startTime;
+            }
+        }
+
+        function setTime20() {
+            if (testComplete == true) {
+                startTime = 20;
+                document.getElementById("timeRemaining").innerHTML = startTime;
+            }
+        }
+
+        function start() {
+            testComplete = false;
+            timing = true;
+            timeRemaining = startTime;
+            window.setInterval(function () {
+                if (timeRemaining >= 0.01) {
+                    timeRemaining -= 0.01;
+                    timeRemaining = timeRemaining.toFixed(2);
+                    document.getElementById("timeRemaining").innerHTML = timeRemaining;
+                } else {
+                    for (var i = 1; i < 99999; i++)
+                        window.clearInterval(i);
+                    stop();
+                }
+            }, 10);
+            document.getElementById("start").style.display = "none";
+        }
+
+        function stop() {
+            timing = false;
+            clearInterval(start);
+            CPS = clicks / startTime;
+            if (CPS > highScore) {
+                highScore = CPS;
+                document.getElementById("highScore").innerHTML = highScore;
+            }
+            document.getElementById("CPS").innerHTML = CPS;
+            document.getElementById("clicks").innerHTML = clicks;
+            document.getElementById("next").style.display = "block";
+        }
+
+        function next() {
+            testComplete = true;
+            CPS = 0;
+            clicks = 0;
+            document.getElementById("start").style.display = "block";
+            document.getElementById("next").style.display = "none";
+        }
+
+        function onClick() {
+            if (timing == true) {
+                clicks++;
+                document.getElementById("clicks").innerHTML = clicks;
+            }
+        }
+
+    </script>
+</body>
+
+</html>
