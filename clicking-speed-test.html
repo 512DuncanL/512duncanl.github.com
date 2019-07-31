@@ -4,16 +4,14 @@
     <style>
         body {
             font-family: Arial, sans-serif;
+            font-size: 15px;
+            overflow: scroll;
             text-align: center;
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            -ms-transform: translate(-50%, -50%);
-            transform: translate(-50%, -50%);
         }
 
         button {
             cursor: pointer;
+            margin: auto;
         }
 
         #clickDiv {
@@ -22,9 +20,11 @@
             height: 30vh;
             position: relative;
             cursor: pointer;
+            margin: auto;
         }
 
         #divText {
+            margin: 0;
             position: absolute;
             top: 50%;
             left: 50%;
@@ -38,33 +38,63 @@
             user-select: none;
         }
 
-        #next {
+        #next,
+        #exit {
             display: none;
         }
+
+        .ct-chart {
+            width: 60vw !important;
+            margin-left: 20vw;
+        }
+
+        #chart,
+        #realTimeHeading {
+            display: none;
+        }
+
+        @media (max-width: 900px) {
+
+            #realTime,
+            #realTimeHeading,
+            .ct-double-octave {
+                display: none !important;
+            }
+        }
     </style>
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/chartist.js/latest/chartist.min.css">
+    <script src="//cdn.jsdelivr.net/chartist.js/latest/chartist.min.js"></script>
 </head>
 
 <body>
+    <br>
     <h1>Clicking Speed Test</h1>
     <div id="div">
         <p>Testing Time:</p>
         <button id="5sec" onclick="setTime5()">5 SECONDS</button>
         <button id="10sec" onclick="setTime10()">10 SECONDS</button>
         <button id="20sec" onclick="setTime20()">20 SECONDS</button>
+        <button id="realTime" onclick="realTime()">REALTIME CPS</button>
     </div>
     <br>
     <div style="text-align: center">
         <p>Clicks: <span id="clicks">0</span></p>
         <p>Time Remaining: <span id="timeRemaining">5</span> Seconds</p>
-        <p>CPS: <span id="cps"></span></p>
+        <p>CPS: <span id="cps">0</span></p>
         <p>High Score: <span id="highScore">0</span> CPS</p>
-        <div onclick="onClick()" id="clickDiv">
+        <div onclick="clickCount()" id="clickDiv">
             <p id="divText">Click here</p>
         </div>
+        <br>
+        <h2 id="realTimeHeading">Realtime CPS</h2>
+        <div id="chart" class="ct-chart ct-double-octave"></div>
         <br>
         <br>
         <button id="start" onclick="start()">START</button>
         <button id="next" onclick="next()">NEXT</button>
+        <button id="exit" onclick="exit()">EXIT</button>
+        <br>
+        <br>
     </div>
     <script>
         var startTime = 5;
@@ -72,10 +102,113 @@
         var timeRemaining;
         var CPS;
         var timing = false;
-        var testComplete = false;
+        var testComplete = true;
         var highScore = 0;
 
+        //CHART CODE START
+        var newCPS = 0;
+        var oldCPS1 = 0;
+        var oldCPS2 = 0;
+        var oldCPS3 = 0;
+        var oldCPS4 = 0;
+        var oldCPS5 = 0;
+        var oldCPS6 = 0;
+        var oldCPS7 = 0;
+        var oldCPS8 = 0;
+        var oldCPS9 = 0;
+        var oldCPS10 = 0;
+        var oldCPS11 = 0;
+        var oldCPS12 = 0;
+        var oldCPS13 = 0;
+        var oldCPS14 = 0;
+        var oldCPS15 = 0;
+        var oldCPS16 = 0;
+        var oldCPS17 = 0;
+        var oldCPS18 = 0;
+        var oldCPS19 = 0;
+
+        var data = {
+            series: [
+                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+            ]
+        };
+        var options = {
+            axisX: {
+                onlyInteger: true,
+                showGrid: false,
+            },
+            showPoint: false,
+            fullWidth: true,
+            lineSmooth: Chartist.Interpolation.simple({
+                divisor: 2.5
+            }),
+            chartPadding: {
+                right: 45,
+            }
+        };
+
+        var clickChart = new Chartist.Line('.ct-chart', data, options);
+
+        function updateChart() {
+            oldCPS19 = oldCPS18;
+            oldCPS18 = oldCPS17;
+            oldCPS17 = oldCPS16;
+            oldCPS16 = oldCPS15;
+            oldCPS15 = oldCPS14;
+            oldCPS14 = oldCPS13;
+            oldCPS13 = oldCPS12;
+            oldCPS12 = oldCPS11;
+            oldCPS11 = oldCPS10;
+            oldCPS10 = oldCPS9;
+            oldCPS9 = oldCPS8;
+            oldCPS8 = oldCPS7;
+            oldCPS7 = oldCPS6;
+            oldCPS6 = oldCPS5;
+            oldCPS5 = oldCPS4;
+            oldCPS4 = oldCPS3;
+            oldCPS3 = oldCPS2;
+            oldCPS2 = oldCPS1;
+            oldCPS1 = newCPS;
+
+            newCPS = clicks;
+
+            var newData = {
+                series: [
+                    [oldCPS19, oldCPS18, oldCPS17, oldCPS16, oldCPS15, oldCPS14, oldCPS13, oldCPS12, oldCPS11, oldCPS10, oldCPS9, oldCPS8, oldCPS7, oldCPS6, oldCPS5, oldCPS4, oldCPS3, oldCPS2, oldCPS1, newCPS]
+                ]
+            };
+            clickChart.update(newData);
+        };
+
+        function setZero() {
+            var newCPS = 0;
+            oldCPS1 = 0;
+            oldCPS2 = 0;
+            oldCPS3 = 0;
+            oldCPS4 = 0;
+            oldCPS5 = 0;
+            oldCPS6 = 0;
+            oldCPS7 = 0;
+            oldCPS8 = 0;
+            oldCPS9 = 0;
+            oldCPS10 = 0;
+            oldCPS11 = 0;
+            oldCPS12 = 0;
+            oldCPS13 = 0;
+            oldCPS14 = 0;
+            oldCPS15 = 0;
+            oldCPS16 = 0;
+            oldCPS17 = 0;
+            oldCPS18 = 0;
+            oldCPS19 = 0;
+        }
+
+        //CHART CODE END
+
+        //MAIN CODE START
+
         function setTime5() {
+
             if (testComplete == true) {
                 startTime = 5;
                 document.getElementById("timeRemaining").innerHTML = startTime;
@@ -83,6 +216,7 @@
         }
 
         function setTime10() {
+
             if (testComplete == true) {
                 startTime = 10;
                 document.getElementById("timeRemaining").innerHTML = startTime;
@@ -94,6 +228,39 @@
                 startTime = 20;
                 document.getElementById("timeRemaining").innerHTML = startTime;
             }
+        }
+
+        function realTime() {
+            setZero();
+            if (testComplete == true && timing == false) {
+                document.getElementById("exit").style.display = "block";
+                document.getElementById("chart").style.display = "block";
+                document.getElementById("realTimeHeading").style.display = "block";
+                document.getElementById("start").style.display = "none";
+                timing = true;
+                setInterval(function () {
+                    updateChart();
+                    CPS = clicks;
+                    clicks = 0;
+                    if (CPS > highScore) {
+                        highScore = CPS;
+                        document.getElementById("highScore").innerHTML = highScore;
+                    }
+                    document.getElementById("cps").innerHTML = CPS;
+                    document.getElementById("clicks").innerHTML = 0;
+                }, 1000);
+            }
+        }
+
+        function exit() {
+            document.getElementById("exit").style.display = "none";
+            setZero();
+            timing = false;
+            document.getElementById("start").style.display = "block";
+            document.getElementById("chart").style.display = "none";
+            document.getElementById("realTimeHeading").style.display = "none";
+            for (var i = 1; i < 99999; i++)
+                window.clearInterval(i);
         }
 
         function start() {
@@ -135,13 +302,13 @@
             document.getElementById("next").style.display = "none";
         }
 
-        function onClick() {
+        function clickCount() {
             if (timing == true) {
                 clicks++;
                 document.getElementById("clicks").innerHTML = clicks;
             }
         }
-
+        //MAIN CODE END
     </script>
 </body>
 
