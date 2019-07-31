@@ -238,6 +238,7 @@
                 document.getElementById("realTimeHeading").style.display = "block";
                 document.getElementById("start").style.display = "none";
                 timing = true;
+                testComplete = false;
                 setInterval(function () {
                     updateChart();
                     CPS = clicks;
@@ -256,6 +257,7 @@
             document.getElementById("exit").style.display = "none";
             setZero();
             timing = false;
+            testComplete = true;
             document.getElementById("start").style.display = "block";
             document.getElementById("chart").style.display = "none";
             document.getElementById("realTimeHeading").style.display = "none";
