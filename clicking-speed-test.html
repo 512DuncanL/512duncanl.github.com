@@ -247,13 +247,11 @@
                 setInterval(function () {
                     updateChart();
                     CPS = clicks;
-                    clicks = 0;
                     if (CPS > highScore) {
                         highScore = CPS;
                         document.getElementById("highScore").innerHTML = highScore;
                     }
                     document.getElementById("cps").innerHTML = CPS;
-                    document.getElementById("clicks").innerHTML = 0;
                 }, 1000);
             }
         }
