@@ -215,7 +215,6 @@
         //MAIN CODE START
 
         function setTime5() {
-
             if (testComplete == true) {
                 startTime = 5;
                 document.getElementById("timeRemaining").innerHTML = startTime;
@@ -223,7 +222,6 @@
         }
 
         function setTime10() {
-
             if (testComplete == true) {
                 startTime = 10;
                 document.getElementById("timeRemaining").innerHTML = startTime;
@@ -261,10 +259,11 @@
         }
 
         function exit() {
-            document.getElementById("exit").style.display = "none";
             setZero();
+            document.getElementById("exit").style.display = "none";
             timing = false;
             testComplete = true;
+            document.getElementById("cps").innerHTML = 0;
             document.getElementById("start").style.display = "block";
             document.getElementById("chart").style.display = "none";
             document.getElementById("realTimeHeading").style.display = "none";
