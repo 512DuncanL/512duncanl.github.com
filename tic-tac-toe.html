@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style>
+        body {
+            font-size: 20px;
+        }
+
+        body,
+        table,
+        h1 {
+            margin: auto;
+            text-align: center;
+        }
+
+        td {
+            width: calc(100px + 7vw);
+            height: calc(100px + 7vw);
+            border: 7.5px solid black;
+        }
+
+        img {
+            width: inherit;
+            height: inherit;
+            display: none;
+            opacity: 0;
+            filter: alpha(opacity=0);
+        }
+
+        img:hover {
+            opacity: 0.4;
+            filter: alpha(opacity=40);
+        }
+
+        body {
+            margin: 0;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            -ms-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%);
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Tic Tac Toe</h1>
+    <br>
+    <br>
+    <table>
+        <tr>
+            <td style="border-left-style: none; border-top-style: none;">
+                <img id="1x" onclick="X1()" src="https://img.icons8.com/ios-filled/300/000000/x.png">
+                <img id="1o" onclick="O1()" src="https://img.icons8.com/ios-filled/300/000000/o.png">
+            </td>
+            <td style="border-top-style: none;">
+                <img id="2x" onclick="X2()" src="https://img.icons8.com/ios-filled/300/000000/x.png">
+                <img id="2o" onclick="O2()" src="https://img.icons8.com/ios-filled/300/000000/o.png">
+            </td>
+            <td style="border-right-style: none; border-top-style: none;">
+                <img id="3x" onclick="X3()" src="https://img.icons8.com/ios-filled/300/000000/x.png">
+                <img id="3o" onclick="O3()" src="https://img.icons8.com/ios-filled/300/000000/o.png">
+            </td>
+        </tr>
+        <tr>
+            <td style="border-left-style: none;">
+                <img id="4x" onclick="X4()" src="https://img.icons8.com/ios-filled/300/000000/x.png">
+                <img id="4o" onclick="O4()" src="https://img.icons8.com/ios-filled/300/000000/o.png">
+            </td>
+            <td>
+                <img id="5x" onclick="X5()" src="https://img.icons8.com/ios-filled/300/000000/x.png">
+                <img id="5o" onclick="O5()" src="https://img.icons8.com/ios-filled/300/000000/o.png">
+            </td>
+            <td style="border-right-style: none;">
+                <img id="6x" onclick="X6()" src="https://img.icons8.com/ios-filled/300/000000/x.png">
+                <img id="6o" onclick="O6()" src="https://img.icons8.com/ios-filled/300/000000/o.png">
+            </td>
+        </tr>
+        <tr>
+            <td style="border-left-style: none; border-bottom-style: none;">
+                <img id="7x" onclick="X7()" src="https://img.icons8.com/ios-filled/300/000000/x.png">
+                <img id="7o" onclick="O7()" src="https://img.icons8.com/ios-filled/300/000000/o.png">
+            </td>
+            <td style="border-bottom-style: none;">
+                <img id="8x" onclick="X8()" src="https://img.icons8.com/ios-filled/300/000000/x.png">
+                <img id="8o" onclick="O8()" src="https://img.icons8.com/ios-filled/300/000000/o.png">
+            </td>
+            <td style="border-right-style: none; border-bottom-style: none;">
+                <img id="9x" onclick="X9()" src="https://img.icons8.com/ios-filled/300/000000/x.png">
+                <img id="9o" onclick="O9()" src="https://img.icons8.com/ios-filled/300/000000/o.png">
+            </td>
+        </tr>
+    </table>
+    <script>
+        var player1;
+        var player2;
+        var gameOver = false;
+
+        var v1 = 0;
+        var v2 = 0;
+        var v3 = 0;
+        var h1 = 0;
+        var h2 = 0;
+        var h3 = 0;
+        var d1 = 0;
+        var d2 = 0;
+
+        var square1 = false;
+        var square2 = false;
+        var square3 = false;
+        var square4 = false;
+        var square5 = false;
+        var square6 = false;
+        var square7 = false;
+        var square8 = false;
+        var square9 = false;
+
+        player1 = prompt("Player 1, please type in your name.", "X");
+        while (player1 == "") {
+            player1 = prompt("Player 1, please type in your name.", "X");
+        }
+        player2 = prompt("Player 2, please type in your name.", "O");
+        while (player2 == "" || player2 == player1) {
+            if (player2 == "") {
+                player2 = prompt("Player 2, please type in your name.", "O");
+            }
+            if (player2 == player1) {
+                player2 = prompt("Player 2, please type a name different to Player 1.", "O");
+            }
+        }
+        alert(player1 + ", it is your turn to play.");
+        for (var i = 1; i < 10; i++) {
+            document.getElementById(i + "x").style.display = "block";
+        }
+
+        function O() {
+            alert(player2 + ", it is your turn to play.");
+            if (gameOver == false) {
+                if (square1 == false) {
+                    document.getElementById("1x").style.display = "none";
+                    document.getElementById("1o").style.display = "block";
+                }
+                if (square2 == false) {
+                    document.getElementById("2x").style.display = "none";
+                    document.getElementById("2o").style.display = "block";
+                }
+                if (square3 == false) {
+                    document.getElementById("3x").style.display = "none";
+                    document.getElementById("3o").style.display = "block";
+                }
+                if (square4 == false) {
+                    document.getElementById("4x").style.display = "none";
+                    document.getElementById("4o").style.display = "block";
+                }
+                if (square5 == false) {
+                    document.getElementById("5x").style.display = "none";
+                    document.getElementById("5o").style.display = "block";
+                }
+                if (square6 == false) {
+                    document.getElementById("6x").style.display = "none";
+                    document.getElementById("6o").style.display = "block";
+                }
+                if (square7 == false) {
+                    document.getElementById("7x").style.display = "none";
+                    document.getElementById("7o").style.display = "block";
+                }
+                if (square8 == false) {
+                    document.getElementById("8x").style.display = "none";
+                    document.getElementById("8o").style.display = "block";
+                }
+                if (square9 == false) {
+                    document.getElementById("9x").style.display = "none";
+                    document.getElementById("9o").style.display = "block";
+                }
+            }
+        }
+
+        function X() {
+            alert(player1 + ", it is your turn to play.");
+            if (gameOver == false) {
+                if (square1 == false) {
+                    document.getElementById("1x").style.display = "block";
+                    document.getElementById("1o").style.display = "none";
+                }
+                if (square2 == false) {
+                    document.getElementById("2x").style.display = "block";
+                    document.getElementById("2o").style.display = "none";
+                }
+                if (square3 == false) {
+                    document.getElementById("3x").style.display = "block";
+                    document.getElementById("3o").style.display = "none";
+                }
+                if (square4 == false) {
+                    document.getElementById("4x").style.display = "block";
+                    document.getElementById("4o").style.display = "none";
+                }
+                if (square5 == false) {
+                    document.getElementById("5x").style.display = "block";
+                    document.getElementById("5o").style.display = "none";
+                }
+                if (square6 == false) {
+                    document.getElementById("6x").style.display = "block";
+                    document.getElementById("6o").style.display = "none";
+                }
+                if (square7 == false) {
+                    document.getElementById("7x").style.display = "block";
+                    document.getElementById("7o").style.display = "none";
+                }
+                if (square8 == false) {
+                    document.getElementById("8x").style.display = "block";
+                    document.getElementById("8o").style.display = "none";
+                }
+                if (square9 == false) {
+                    document.getElementById("9x").style.display = "block";
+                    document.getElementById("9o").style.display = "none";
+                }
+            }
+        }
+
+        function X1() {
+            if (square1 == false) {
+                square1 = true;
+                d1 -= 1;
+                v1 -= 1;
+                h1 -= 1;
+                document.getElementById("1x").style.opacity = "1.0";
+                if (d1 == -3 || v1 == -3 || h1 == -3) {
+                    alert(player1 + " has won!");
+                    gameOver = true;
+                } else {
+                    O();
+                }
+            }
+        }
+
+        function O1() {
+            if (square1 == false) {
+                square1 = true;
+                d1 += 1;
+                v1 += 1;
+                h1 += 1;
+                document.getElementById("1o").style.opacity = "1.0";
+                if (d1 == 3 || v1 == 3 || h1 == 3) {
+                    alert(player2 + " has won!");
+                    gameOver == true;
+                } else {
+                    X();
+                }
+            }
+        }
+
+        function X2() {
+            if (square2 == false) {
+                square2 = true;
+                v2 -= 1;
+                h1 -= 1;
+                document.getElementById("2x").style.opacity = "1.0";
+                if (v2 == -3 || h1 == -3) {
+                    alert(player1 + " has won!");
+                    gameOver = true;
+                } else {
+                    O();
+                }
+            }
+        }
+
+        function O2() {
+            if (square2 == false) {
+                square2 = true;
+                v2 += 1;
+                h1 += 1;
+                document.getElementById("2o").style.opacity = "1.0";
+                if (v2 == 3 || h1 == 3) {
+                    alert(player2 + " has won!");
+                    gameOver == true;
+                } else {
+                    X();
+                }
+            }
+        }
+
+        function X3() {
+            if (square3 == false) {
+                square3 = true;
+                d2 -= 1;
+                v3 -= 1;
+                h1 -= 1;
+                document.getElementById("3x").style.opacity = "1.0";
+                if (d2 == -3 || v3 == -3 || h1 == -3) {
+                    alert(player1 + " has won!");
+                    gameOver = true;
+                } else {
+                    O();
+                }
+            }
+        }
+
+        function O3() {
+            if (square3 == false) {
+                square3 = true;
+                d2 += 1;
+                v3 += 1;
+                h1 += 1;
+                document.getElementById("3o").style.opacity = "1.0";
+                if (d2 == 3 || v3 == 3 || h1 == 3) {
+                    alert(player2 + " has won!");
+                    gameOver == true;
+                } else {
+                    X();
+                }
+            }
+        }
+
+        function X4() {
+            if (square4 == false) {
+                square4 = true;
+                v1 -= 1;
+                h2 -= 1;
+                document.getElementById("4x").style.opacity = "1.0";
+                if (v1 == -3 || h2 == -3) {
+                    alert(player1 + " has won!");
+                    gameOver = true;
+                } else {
+                    O();
+                }
+            }
+        }
+
+        function O4() {
+            if (square4 == false) {
+                square4 = true;
+                v1 += 1;
+                h2 += 1;
+                document.getElementById("4o").style.opacity = "1.0";
+                if (v1 == 3 || h2 == 3) {
+                    alert(player2 + " has won!");
+                    gameOver == true;
+                } else {
+                    X();
+                }
+            }
+        }
+
+        function X5() {
+            if (square5 == false) {
+                square5 = true;
+                d1 -= 1;
+                d2 -= 1;
+                h2 -= 1;
+                v2 -= 1;
+                document.getElementById("5x").style.opacity = "1.0";
+                if (d1 == -3 || d2 == -3 || h2 == -3 || v2 == -3) {
+                    alert(player1 + " has won!");
+                    gameOver = true;
+                } else {
+                    O();
+                }
+            }
+        }
+
+        function O5() {
+            if (square5 == false) {
+                square5 = true;
+                d1 += 1;
+                d2 += 1;
+                h2 += 1;
+                v2 += 1;
+                document.getElementById("5o").style.opacity = "1.0";
+                if (d1 == 3 || d2 == 3 || h2 == 3 || v2 == 3) {
+                    alert(player2 + " has won!");
+                    gameOver == true;
+                } else {
+                    X();
+                }
+            }
+        }
+
+        function X6() {
+            if (square6 == false) {
+                square6 = true;
+                v3 -= 1;
+                h2 -= 1;
+                document.getElementById("6x").style.opacity = "1.0";
+                if (v3 == -3 || h2 == -3) {
+                    alert(player1 + " has won!");
+                    gameOver = true;
+                } else {
+                    O();
+                }
+            }
+        }
+
+        function O6() {
+            if (square6 == false) {
+                square6 = true;
+                v3 += 1;
+                h2 += 1;
+                document.getElementById("6o").style.opacity = "1.0";
+                if (v3 == 3 || h2 == 3) {
+                    alert(player2 + " has won!");
+                    gameOver == true;
+                } else {
+                    X();
+                }
+            }
+        }
+
+        function X7() {
+            if (square7 == false) {
+                square7 = true;
+                d2 -= 1;
+                v1 -= 1;
+                h3 -= 1;
+                document.getElementById("7x").style.opacity = "1.0";
+                if (d2 == -3 || v1 == -3 || h3 == -3) {
+                    alert(player1 + " has won!");
+                    gameOver = true;
+                } else {
+                    O();
+                }
+            }
+        }
+
+        function O7() {
+            if (square7 == false) {
+                square7 = true;
+                d2 += 1;
+                v1 += 1;
+                h3 += 1;
+                document.getElementById("7o").style.opacity = "1.0";
+                if (d2 == 3 || v1 == 3 || h3 == 3) {
+                    alert(player2 + " has won!");
+                    gameOver == true;
+                } else {
+                    X();
+                }
+            }
+        }
+
+        function X8() {
+            if (square8 == false) {
+                square8 = true;
+                v2 -= 1;
+                h3 -= 1;
+                document.getElementById("8x").style.opacity = "1.0";
+                if (v2 == -3 || h3 == -3) {
+                    alert(player1 + " has won!");
+                    gameOver = true;
+                } else {
+                    O();
+                }
+            }
+        }
+
+        function O8() {
+            if (square8 == false) {
+                square8 = true;
+                v2 += 1;
+                h3 += 1;
+                document.getElementById("8o").style.opacity = "1.0";
+                if (v2 == 3 || h3 == 3) {
+                    alert(player2 + " has won!");
+                    gameOver == true;
+                } else {
+                    X();
+                }
+            }
+        }
+
+        function X9() {
+            if (square9 == false) {
+                square9 = true;
+                d1 -= 1;
+                v3 -= 1;
+                h3 -= 1;
+                document.getElementById("9x").style.opacity = "1.0";
+                if (d1 == -3 || v3 == -3 || h3 == -3) {
+                    alert(player1 + " has won!");
+                    gameOver = true;
+                } else {
+                    O();
+                }
+            }
+        }
+
+        function O9() {
+            if (square9 == false) {
+                square9 = true;
+                d1 += 1;
+                v3 += 1;
+                h3 += 1;
+                document.getElementById("9o").style.opacity = "1.0";
+                if (d1 == 3 || v3 == 3 || h3 == 3) {
+                    alert(player2 + " has won!");
+                    gameOver == true;
+                } else {
+                    X();
+                }
+            }
+        }
+    </script>
+</body>
+
+</html>
