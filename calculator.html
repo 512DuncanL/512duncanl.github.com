@@ -26,6 +26,23 @@
             height: calc(50px + 3vw);
             border: 5px solid black;
             cursor: pointer;
+            background-color: grey;
+            color: white
+        }
+
+        #orange {
+            background-color: orangered;
+            color: white;
+        }
+
+        #numBar {
+            background-color: white;
+            color: black;
+        }
+
+        .blue {
+            background-color: blue;
+            color: white;
         }
     </style>
 </head>
@@ -41,25 +58,25 @@
             <td onclick="num7()">7</td>
             <td onclick="num8()">8</td>
             <td onclick="num9()">9</td>
-            <td onclick="divide()">&div;</td>
+            <td onclick="divide()" class="blue">&div;</td>
         </tr>
         <tr>
             <td onclick="num4()">4</td>
             <td onclick="num5()">5</td>
             <td onclick="num6()">6</td>
-            <td onclick="multiply()">&times;</td>
+            <td onclick="multiply()" class="blue">&times;</td>
         </tr>
         <tr>
             <td onclick="num3()">3</td>
             <td onclick="num2()">2</td>
             <td onclick="num1()">1</td>
-            <td onclick="minus()">&minus;</td>
+            <td onclick="minus()" class="blue">&minus;</td>
         </tr>
         <tr>
             <td onclick="num0()">0</td>
             <td style="font-size: 40px" onclick="decimal()">&middot;</td>
-            <td onclick="equals()">&equals;</td>
-            <td onclick="plus()">&plus;</td>
+            <td onclick="equals()" id="orange">&equals;</td>
+            <td onclick="plus()" class="blue">&plus;</td>
         </tr>
     </table>
     <script>
