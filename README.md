@@ -4,6 +4,7 @@ Site: [https://512duncanl.github.io](https://512duncanl.github.io)
 
 ## Games
 - [The Lobster Game (Singleplayer)](https://512duncanl.github.io/lobster-game.html)
+- [Tic Tac Toe (Multiplayer)](https://512duncanl.github.io/tic-tac-toe.html)
 ## Sites
 - [Mycreeper (A Minecraft guide)](https://mycreeper.site)
 ## Others
