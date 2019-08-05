@@ -9,3 +9,4 @@ Site: [https://512duncanl.github.io](https://512duncanl.github.io)
 - [Mycreeper (A Minecraft guide)](https://mycreeper.site)
 ## Others
 - [Clicking Speed Test](https://512duncanl.github.io/clicking-speed-test.html)
+- [Calculator](https://512duncanl.github.io/calculator.html)
