@@ -21,13 +21,17 @@
             text-align: center;
         }
 
+        table {
+            border: 5px solid black;
+        }
+
         td {
             width: calc(50px + 3vw);
             height: calc(50px + 3vw);
-            border: 5px solid black;
+            border: 2.5px solid white;
             cursor: pointer;
             background-color: grey;
-            color: white
+            color: white;
         }
 
         #orange {
@@ -36,13 +40,17 @@
         }
 
         #numBar {
+            border: 5px solid black;
             background-color: white;
             color: black;
         }
 
         .blue {
             background-color: blue;
-            color: white;
+        }
+
+        .green {
+            background-color: green;
         }
     </style>
 </head>
@@ -55,32 +63,40 @@
             <td id="numBar" colspan="4">0</td>
         </tr>
         <tr>
+            <td onclick="reset()" class="green">C</td>
+            <td onclick="mPlus()" class="green">M+</td>
+            <td onclick="document.getElementById('numBar').innerHTML = memory" class="green">MR</td>
+            <td onclick="memory = 0" class="green">MC</td>
+        </tr>
+        <tr>
             <td onclick="num7()">7</td>
             <td onclick="num8()">8</td>
             <td onclick="num9()">9</td>
-            <td onclick="divide()" class="blue">&div;</td>
+            <td onclick="divide()" id="divide" class="blue">&div;</td>
         </tr>
         <tr>
             <td onclick="num4()">4</td>
             <td onclick="num5()">5</td>
             <td onclick="num6()">6</td>
-            <td onclick="multiply()" class="blue">&times;</td>
+            <td onclick="multiply()" id="multiply" class="blue">&times;</td>
         </tr>
         <tr>
-            <td onclick="num3()">3</td>
-            <td onclick="num2()">2</td>
             <td onclick="num1()">1</td>
-            <td onclick="minus()" class="blue">&minus;</td>
+            <td onclick="num2()">2</td>
+            <td onclick="num3()">3</td>
+            <td onclick="minus()" id="minus" class="blue">&minus;</td>
         </tr>
         <tr>
             <td onclick="num0()">0</td>
             <td style="font-size: 40px" onclick="decimal()">&middot;</td>
             <td onclick="equals()" id="orange">&equals;</td>
-            <td onclick="plus()" class="blue">&plus;</td>
+            <td onclick="plus()" id="plus" class="blue">&plus;</td>
         </tr>
     </table>
     <script>
         var num = 0;
+        var typedNum = 0;
+        var memory = 0;
         var minusNum = 0;
         var minusOn = false;
         var plusNum = 0;
@@ -92,625 +108,760 @@
         var decimalPoint = false;
 
         function num0() {
-            if (multiplyOn == true) {
-                multiply = multiply.toString();
-                multiplyNum += "0";
-                parseFloat(multiplyNum);
-                document.getElementById("numBar").innerHTML = multiplyNum;
-            } else if (divideOn == true) {
-                divideNum = divideNum.toString();
-                divideNum += "9";
-                parseFloat(divideNum);
-                document.getElementById("numBar").innerHTML = divideNum;
-            } else if (plusOn == true) {
-                plusNum = plusNum.toString();
-                plusNum += "9";
-                parseFloat(minusNum);
-                document.getElementById("numBar").innerHTML = plusNum;
-            } else if (minusOn == true) {
-                minusNum = minusNum.toString();
-                minusNum += "9";
-                parseFloat(minusNum);
-                document.getElementById("numBar").innerHTML = minusNum;
-            } else if (num != 0 || decimalPoint == true) {
-                num = num.toString();
-                num += "0";
-                parseFloat(num);
-                document.getElementById("numBar").innerHTML = num;
+            if ((Math.ceil(Math.log10(num + 1))) <= 15) {
+                typedNum++;
+                if (multiplyOn == true && multiplyNum != 0) {
+                    multiply = multiply.toString();
+                    multiplyNum += "0";
+                    parseFloat(multiplyNum);
+                    document.getElementById("numBar").innerHTML = multiplyNum;
+                } else if (divideOn == true) {
+                    divideNum = divideNum.toString();
+                    divideNum += "9";
+                    parseFloat(divideNum);
+                    document.getElementById("numBar").innerHTML = divideNum;
+                } else if (plusOn == true) {
+                    plusNum = plusNum.toString();
+                    plusNum += "9";
+                    parseFloat(minusNum);
+                    document.getElementById("numBar").innerHTML = plusNum;
+                } else if (minusOn == true) {
+                    minusNum = minusNum.toString();
+                    minusNum += "9"; l
+                    parseFloat(minusNum);
+                    document.getElementById("numBar").innerHTML = minusNum;
+                } else if ((num != 0 || decimalPoint == true) && multiplyOn == false && divideOn == false && plusOn == false && minusOn == false) {
+                    num = num.toString();
+                    num += "0";
+                    num = parseFloat(num);
+                    document.getElementById("numBar").innerHTML = num;
+                }
             }
         }
 
         function num1() {
-            if (multiplyOn == true) {
-                if (multiplyNum == 0) {
-                    multiplyNum += 1;
+            if ((Math.ceil(Math.log10(num + 1))) <= 15) {
+                typedNum++;
+                if (multiplyOn == true) {
+                    if (multiplyNum == 0) {
+                        multiplyNum += 1;
+                    } else {
+                        multiply = multiply.toString();
+                        multiplyNum += "1";
+                        parseFloat(multiplyNum);
+                    }
+                    document.getElementById("numBar").innerHTML = multiplyNum;
+                } else if (divideOn == true) {
+                    if (divideNum == 0) {
+                        divideNum += 1;
+                    } else {
+                        divideNum = divideNum.toString();
+                        divideNum += "1";
+                        parseFloat(divideNum);
+                    }
+                    document.getElementById("numBar").innerHTML = divideNum;
+                } else if (plusOn == true) {
+                    if (plusNum == 0) {
+                        plusNum += 1;
+                    } else {
+                        plusNum = plusNum.toString();
+                        plusNum += "1";
+                        parseFloat(minusNum);
+                    }
+                    document.getElementById("numBar").innerHTML = plusNum;
+                } else if (minusOn == true) {
+                    if (minusNum == 0) {
+                        minusNum += 1;
+                    } else {
+                        minusNum = minusNum.toString();
+                        minusNum += "1";
+                        parseFloat(minusNum);
+                    }
+                    document.getElementById("numBar").innerHTML = minusNum;
+                } else if (num == 0) {
+                    num += 1;
+                    document.getElementById("numBar").innerHTML = num;
                 } else {
-                    multiply = multiply.toString();
-                    multiplyNum += "1";
-                    parseFloat(multiplyNum);
+                    num = num.toString();
+                    num += "1";
+                    num = parseFloat(num);
+                    document.getElementById("numBar").innerHTML = num;
                 }
-                document.getElementById("numBar").innerHTML = multiplyNum;
-            } else if (divideOn == true) {
-                if (divideNum == 0) {
-                    divideNum += 1;
-                } else {
-                    divideNum = divideNum.toString();
-                    divideNum += "1";
-                    parseFloat(divideNum);
-                }
-                document.getElementById("numBar").innerHTML = divideNum;
-            } else if (plusOn == true) {
-                if (plusNum == 0) {
-                    plusNum += 1;
-                } else {
-                    plusNum = plusNum.toString();
-                    plusNum += "1";
-                    parseFloat(minusNum);
-                }
-                document.getElementById("numBar").innerHTML = plusNum;
-            } else if (minusOn == true) {
-                if (minusNum == 0) {
-                    minusNum += 1;
-                } else {
-                    minusNum = minusNum.toString();
-                    minusNum += "1";
-                    parseFloat(minusNum);
-                }
-                document.getElementById("numBar").innerHTML = minusNum;
-            } else if (num == 0 && minusNum == false) {
-                num += 1;
-                document.getElementById("numBar").innerHTML = num;
-            } else {
-                num = num.toString();
-                num += "1";
-                parseFloat(num);
-                document.getElementById("numBar").innerHTML = num;
             }
         }
 
         function num2() {
-            if (multiplyOn == true) {
-                if (multiplyNum == 0) {
-                    multiplyNum += 2;
+            if (typedNum <= 15) {
+                typedNum++;
+                if (multiplyOn == true) {
+                    if (multiplyNum == 0) {
+                        multiplyNum += 2;
+                    } else {
+                        multiply = multiply.toString();
+                        multiplyNum += "2";
+                        parseFloat(multiplyNum);
+                    }
+                    document.getElementById("numBar").innerHTML = multiplyNum;
+                } else if (divideOn == true) {
+                    if (divideNum == 0) {
+                        divideNum += 2;
+                    } else {
+                        divideNum = divideNum.toString();
+                        divideNum += "2";
+                        parseFloat(divideNum);
+                    }
+                    document.getElementById("numBar").innerHTML = divideNum;
+                } else if (plusOn == true) {
+                    if (plusNum == 0) {
+                        plusNum += 2;
+                    } else {
+                        plusNum = plusNum.toString();
+                        plusNum += "2";
+                        parseFloat(minusNum);
+                    }
+                    document.getElementById("numBar").innerHTML = plusNum;
+                } else if (minusOn == true) {
+                    if (minusNum == 0) {
+                        minusNum += 2;
+                    } else {
+                        minusNum = minusNum.toString();
+                        minusNum += "2";
+                        parseFloat(minusNum);
+                    }
+                    document.getElementById("numBar").innerHTML = minusNum;
+                } else if (num == 0) {
+                    num += 2;
+                    document.getElementById("numBar").innerHTML = num;
                 } else {
-                    multiply = multiply.toString();
-                    multiplyNum += "2";
-                    parseFloat(multiplyNum);
+                    num = num.toString();
+                    num += "2";
+                    num = parseFloat(num);
+                    document.getElementById("numBar").innerHTML = num;
                 }
-                document.getElementById("numBar").innerHTML = multiplyNum;
-            } else if (divideOn == true) {
-                if (divideNum == 0) {
-                    divideNum += 2;
-                } else {
-                    divideNum = divideNum.toString();
-                    divideNum += "2";
-                    parseFloat(divideNum);
-                }
-                document.getElementById("numBar").innerHTML = divideNum;
-            } else if (plusOn == true) {
-                if (plusNum == 0) {
-                    plusNum += 2;
-                } else {
-                    plusNum = plusNum.toString();
-                    plusNum += "2";
-                    parseFloat(minusNum);
-                }
-                document.getElementById("numBar").innerHTML = plusNum;
-            } else if (minusOn == true) {
-                if (minusNum == 0) {
-                    minusNum += 2;
-                } else {
-                    minusNum = minusNum.toString();
-                    minusNum += "2";
-                    parseFloat(minusNum);
-                }
-                document.getElementById("numBar").innerHTML = minusNum;
-            } else if (num == 0) {
-                num += 2;
-                document.getElementById("numBar").innerHTML = num;
-            } else {
-                num = num.toString();
-                num += "2";
-                parseFloat(num);
-                document.getElementById("numBar").innerHTML = num;
             }
         }
 
         function num3() {
-            if (multiplyOn == true) {
-                if (multiplyNum == 0) {
-                    multiplyNum += 3;
+            if (typedNum <= 15) {
+                typedNum++;
+                if (multiplyOn == true) {
+                    if (multiplyNum == 0) {
+                        multiplyNum += 3;
+                    } else {
+                        multiply = multiply.toString();
+                        multiplyNum += "3";
+                        parseFloat(multiplyNum);
+                    }
+                    document.getElementById("numBar").innerHTML = multiplyNum;
+                } else if (divideOn == true) {
+                    if (divideNum == 0) {
+                        divideNum += 3;
+                    } else {
+                        divideNum = divideNum.toString();
+                        divideNum += "3";
+                        parseFloat(divideNum);
+                    }
+                    document.getElementById("numBar").innerHTML = divideNum;
+                } else if (plusOn == true) {
+                    if (plusNum == 0) {
+                        plusNum += 3;
+                    } else {
+                        plusNum = plusNum.toString();
+                        plusNum += "3";
+                        parseFloat(minusNum);
+                    }
+                    document.getElementById("numBar").innerHTML = plusNum;
+                } else if (minusOn == true) {
+                    if (minusNum == 0) {
+                        minusNum += 3;
+                    } else {
+                        minusNum = minusNum.toString();
+                        minusNum += "3";
+                        parseFloat(minusNum);
+                    }
+                    document.getElementById("numBar").innerHTML = minusNum;
+                } else if (num == 0) {
+                    num += 3;
+                    document.getElementById("numBar").innerHTML = num;
                 } else {
-                    multiply = multiply.toString();
-                    multiplyNum += "3";
-                    parseFloat(multiplyNum);
+                    num = num.toString();
+                    num += "3";
+                    num = parseFloat(num);
+                    document.getElementById("numBar").innerHTML = num;
                 }
-                document.getElementById("numBar").innerHTML = multiplyNum;
-            } else if (divideOn == true) {
-                if (divideNum == 0) {
-                    divideNum += 3;
-                } else {
-                    divideNum = divideNum.toString();
-                    divideNum += "3";
-                    parseFloat(divideNum);
-                }
-                document.getElementById("numBar").innerHTML = divideNum;
-            } else if (plusOn == true) {
-                if (plusNum == 0) {
-                    plusNum += 3;
-                } else {
-                    plusNum = plusNum.toString();
-                    plusNum += "3";
-                    parseFloat(minusNum);
-                }
-                document.getElementById("numBar").innerHTML = plusNum;
-            } else if (minusOn == true) {
-                if (minusNum == 0) {
-                    minusNum += 3;
-                } else {
-                    minusNum = minusNum.toString();
-                    minusNum += "3";
-                    parseFloat(minusNum);
-                }
-                document.getElementById("numBar").innerHTML = minusNum;
-            } else if (num == 0) {
-                num += 3;
-                document.getElementById("numBar").innerHTML = num;
-            } else {
-                num = num.toString();
-                num += "3";
-                parseFloat(num);
-                document.getElementById("numBar").innerHTML = num;
             }
         }
 
         function num4() {
-            if (multiplyOn == true) {
-                if (multiplyNum == 0) {
-                    multiplyNum += 4;
+            if (typedNum <= 15) {
+                typedNum++;
+                if (multiplyOn == true) {
+                    if (multiplyNum == 0) {
+                        multiplyNum += 4;
+                    } else {
+                        multiply = multiply.toString();
+                        multiplyNum += "4";
+                        parseFloat(multiplyNum);
+                    }
+                    document.getElementById("numBar").innerHTML = multiplyNum;
+                } else if (divideOn == true) {
+                    if (divideNum == 0) {
+                        divideNum += 4;
+                    } else {
+                        divideNum = divideNum.toString();
+                        divideNum += "4";
+                        parseFloat(divideNum);
+                    }
+                    document.getElementById("numBar").innerHTML = divideNum;
+                } else if (plusOn == true) {
+                    if (plusNum == 0) {
+                        plusNum += 4;
+                    } else {
+                        plusNum = plusNum.toString();
+                        plusNum += "4";
+                        parseFloat(minusNum);
+                    }
+                    document.getElementById("numBar").innerHTML = plusNum;
+                } else if (minusOn == true) {
+                    if (minusNum == 0) {
+                        minusNum += 4;
+                    } else {
+                        minusNum = minusNum.toString();
+                        minusNum += "4";
+                        parseFloat(minusNum);
+                    }
+                    document.getElementById("numBar").innerHTML = minusNum;
+                } else if (num == 0) {
+                    num += 4;
+                    document.getElementById("numBar").innerHTML = num;
                 } else {
-                    multiply = multiply.toString();
-                    multiplyNum += "4";
-                    parseFloat(multiplyNum);
+                    num = num.toString();
+                    num += "4";
+                    num = parseFloat(num);
+                    document.getElementById("numBar").innerHTML = num;
                 }
-                document.getElementById("numBar").innerHTML = multiplyNum;
-            } else if (divideOn == true) {
-                if (divideNum == 0) {
-                    divideNum += 4;
-                } else {
-                    divideNum = divideNum.toString();
-                    divideNum += "4";
-                    parseFloat(divideNum);
-                }
-                document.getElementById("numBar").innerHTML = divideNum;
-            } else if (plusOn == true) {
-                if (plusNum == 0) {
-                    plusNum += 4;
-                } else {
-                    plusNum = plusNum.toString();
-                    plusNum += "4";
-                    parseFloat(minusNum);
-                }
-                document.getElementById("numBar").innerHTML = plusNum;
-            } else if (minusOn == true) {
-                if (minusNum == 0) {
-                    minusNum += 4;
-                } else {
-                    minusNum = minusNum.toString();
-                    minusNum += "4";
-                    parseFloat(minusNum);
-                }
-                document.getElementById("numBar").innerHTML = minusNum;
-            } else if (num == 0) {
-                num += 4;
-                document.getElementById("numBar").innerHTML = num;
-            } else {
-                num = num.toString();
-                num += "4";
-                parseFloat(num);
-                document.getElementById("numBar").innerHTML = num;
             }
         }
 
         function num5() {
-            if (multiplyOn == true) {
-                if (multiplyNum == 0) {
-                    multiplyNum += 5;
+            if (typedNum <= 15) {
+                typedNum++;
+                if (multiplyOn == true) {
+                    if (multiplyNum == 0) {
+                        multiplyNum += 5;
+                    } else {
+                        multiply = multiply.toString();
+                        multiplyNum += "5";
+                        parseFloat(multiplyNum);
+                    }
+                    document.getElementById("numBar").innerHTML = multiplyNum;
+                } else if (divideOn == true) {
+                    if (divideNum == 0) {
+                        divideNum += 5;
+                    } else {
+                        divideNum = divideNum.toString();
+                        divideNum += "5";
+                        parseFloat(divideNum);
+                    }
+                    document.getElementById("numBar").innerHTML = divideNum;
+                } else if (plusOn == true) {
+                    if (plusNum == 0) {
+                        plusNum += 5;
+                    } else {
+                        plusNum = plusNum.toString();
+                        plusNum += "5";
+                        parseFloat(minusNum);
+                    }
+                    document.getElementById("numBar").innerHTML = plusNum;
+                } else if (minusOn == true) {
+                    if (minusNum == 0) {
+                        minusNum += 5;
+                    } else {
+                        minusNum = minusNum.toString();
+                        minusNum += "5";
+                        parseFloat(minusNum);
+                    }
+                    document.getElementById("numBar").innerHTML = minusNum;
+                } else if (num == 0) {
+                    num += 5;
+                    document.getElementById("numBar").innerHTML = num;
                 } else {
-                    multiply = multiply.toString();
-                    multiplyNum += "5";
-                    parseFloat(multiplyNum);
+                    num = num.toString();
+                    num += "5";
+                    num = parseFloat(num);
+                    document.getElementById("numBar").innerHTML = num;
                 }
-                document.getElementById("numBar").innerHTML = multiplyNum;
-            } else if (divideOn == true) {
-                if (divideNum == 0) {
-                    divideNum += 5;
-                } else {
-                    divideNum = divideNum.toString();
-                    divideNum += "5";
-                    parseFloat(divideNum);
-                }
-                document.getElementById("numBar").innerHTML = divideNum;
-            } else if (plusOn == true) {
-                if (plusNum == 0) {
-                    plusNum += 5;
-                } else {
-                    plusNum = plusNum.toString();
-                    plusNum += "5";
-                    parseFloat(minusNum);
-                }
-                document.getElementById("numBar").innerHTML = plusNum;
-            } else if (minusOn == true) {
-                if (minusNum == 0) {
-                    minusNum += 5;
-                } else {
-                    minusNum = minusNum.toString();
-                    minusNum += "5";
-                    parseFloat(minusNum);
-                }
-                document.getElementById("numBar").innerHTML = minusNum;
-            } else if (num == 0) {
-                num += 5;
-                document.getElementById("numBar").innerHTML = num;
-            } else {
-                num = num.toString();
-                num += "5";
-                parseFloat(num);
-                document.getElementById("numBar").innerHTML = num;
             }
         }
 
         function num6() {
-            if (multiplyOn == true) {
-                if (multiplyNum == 0) {
-                    multiplyNum += 6;
+            if (typedNum <= 15) {
+                typedNum++;
+                if (multiplyOn == true) {
+                    if (multiplyNum == 0) {
+                        multiplyNum += 6;
+                    } else {
+                        multiply = multiply.toString();
+                        multiplyNum += "6";
+                        parseFloat(multiplyNum);
+                    }
+                    document.getElementById("numBar").innerHTML = multiplyNum;
+                } else if (divideOn == true) {
+                    if (divideNum == 0) {
+                        divideNum += 6;
+                    } else {
+                        divideNum = divideNum.toString();
+                        divideNum += "6";
+                        parseFloat(divideNum);
+                    }
+                    document.getElementById("numBar").innerHTML = divideNum;
+                } else if (plusOn == true) {
+                    if (plusNum == 0) {
+                        plusNum += 6;
+                    } else {
+                        plusNum = plusNum.toString();
+                        plusNum += "6";
+                        parseFloat(minusNum);
+                    }
+                    document.getElementById("numBar").innerHTML = plusNum;
+                } else if (minusOn == true) {
+                    if (minusNum == 0) {
+                        minusNum += 6;
+                    } else {
+                        minusNum = minusNum.toString();
+                        minusNum += "6";
+                        parseFloat(minusNum);
+                    }
+                    document.getElementById("numBar").innerHTML = minusNum;
+                } else if (num == 0) {
+                    num += 6;
+                    document.getElementById("numBar").innerHTML = num;
                 } else {
-                    multiply = multiply.toString();
-                    multiplyNum += "6";
-                    parseFloat(multiplyNum);
+                    num = num.toString();
+                    num += "6";
+                    num = parseFloat(num);
+                    document.getElementById("numBar").innerHTML = num;
                 }
-                document.getElementById("numBar").innerHTML = multiplyNum;
-            } else if (divideOn == true) {
-                if (divideNum == 0) {
-                    divideNum += 6;
-                } else {
-                    divideNum = divideNum.toString();
-                    divideNum += "6";
-                    parseFloat(divideNum);
-                }
-                document.getElementById("numBar").innerHTML = divideNum;
-            } else if (plusOn == true) {
-                if (plusNum == 0) {
-                    plusNum += 6;
-                } else {
-                    plusNum = plusNum.toString();
-                    plusNum += "6";
-                    parseFloat(minusNum);
-                }
-                document.getElementById("numBar").innerHTML = plusNum;
-            } else if (minusOn == true) {
-                if (minusNum == 0) {
-                    minusNum += 6;
-                } else {
-                    minusNum = minusNum.toString();
-                    minusNum += "6";
-                    parseFloat(minusNum);
-                }
-                document.getElementById("numBar").innerHTML = minusNum;
-            } else if (num == 0) {
-                num += 6;
-                document.getElementById("numBar").innerHTML = num;
-            } else {
-                num = num.toString();
-                num += "6";
-                parseFloat(num);
-                document.getElementById("numBar").innerHTML = num;
             }
         }
 
         function num7() {
-            if (multiplyOn == true) {
-                if (multiplyNum == 0) {
-                    multiplyNum += 7;
+            if (typedNum <= 15) {
+                typedNum++;
+                if (multiplyOn == true) {
+                    if (multiplyNum == 0) {
+                        multiplyNum += 7;
+                    } else {
+                        multiply = multiply.toString();
+                        multiplyNum += "7";
+                        parseFloat(multiplyNum);
+                    }
+                    document.getElementById("numBar").innerHTML = multiplyNum;
+                } else if (divideOn == true) {
+                    if (divideNum == 0) {
+                        divideNum += 7;
+                    } else {
+                        divideNum = divideNum.toString();
+                        divideNum += "7";
+                        parseFloat(divideNum);
+                    }
+                    document.getElementById("numBar").innerHTML = divideNum;
+                } else if (plusOn == true) {
+                    if (plusNum == 0) {
+                        plusNum += 7;
+                    } else {
+                        plusNum = plusNum.toString();
+                        plusNum += "7";
+                        parseFloat(minusNum);
+                    }
+                    document.getElementById("numBar").innerHTML = plusNum;
+                } else if (minusOn == true) {
+                    if (minusNum == 0) {
+                        minusNum += 7;
+                    } else {
+                        minusNum = minusNum.toString();
+                        minusNum += "7";
+                        parseFloat(minusNum);
+                    }
+                    document.getElementById("numBar").innerHTML = minusNum;
+                } else if (num == 0) {
+                    num += 7;
+                    document.getElementById("numBar").innerHTML = num;
                 } else {
-                    multiply = multiply.toString();
-                    multiplyNum += "7";
-                    parseFloat(multiplyNum);
+                    num = num.toString();
+                    num += "7";
+                    num = parseFloat(num);
+                    document.getElementById("numBar").innerHTML = num;
                 }
-                document.getElementById("numBar").innerHTML = multiplyNum;
-            } else if (divideOn == true) {
-                if (divideNum == 0) {
-                    divideNum += 7;
-                } else {
-                    divideNum = divideNum.toString();
-                    divideNum += "7";
-                    parseFloat(divideNum);
-                }
-                document.getElementById("numBar").innerHTML = divideNum;
-            } else if (plusOn == true) {
-                if (plusNum == 0) {
-                    plusNum += 7;
-                } else {
-                    plusNum = plusNum.toString();
-                    plusNum += "7";
-                    parseFloat(minusNum);
-                }
-                document.getElementById("numBar").innerHTML = plusNum;
-            } else if (minusOn == true) {
-                if (minusNum == 0) {
-                    minusNum += 7;
-                } else {
-                    minusNum = minusNum.toString();
-                    minusNum += "7";
-                    parseFloat(minusNum);
-                }
-                document.getElementById("numBar").innerHTML = minusNum;
-            } else if (num == 0) {
-                num += 7;
-                document.getElementById("numBar").innerHTML = num;
-            } else {
-                num = num.toString();
-                num += "7";
-                parseFloat(num);
-                document.getElementById("numBar").innerHTML = num;
             }
         }
 
         function num8() {
-            if (multiplyOn == true) {
-                if (multiplyNum == 0) {
-                    multiplyNum += 8;
+            if (typedNum <= 15) {
+                typedNum++;
+                if (multiplyOn == true) {
+                    if (multiplyNum == 0) {
+                        multiplyNum += 8;
+                    } else {
+                        multiply = multiply.toString();
+                        multiplyNum += "8";
+                        parseFloat(multiplyNum);
+                    }
+                    document.getElementById("numBar").innerHTML = multiplyNum;
+                } else if (divideOn == true) {
+                    if (divideNum == 0) {
+                        divideNum += 8;
+                    } else {
+                        divideNum = divideNum.toString();
+                        divideNum += "8";
+                        parseFloat(divideNum);
+                    }
+                    document.getElementById("numBar").innerHTML = divideNum;
+                } else if (plusOn == true) {
+                    if (plusNum == 0) {
+                        plusNum += 8;
+                    } else {
+                        plusNum = plusNum.toString();
+                        plusNum += "8";
+                        parseFloat(minusNum);
+                    }
+                    document.getElementById("numBar").innerHTML = plusNum;
+                } else if (minusOn == true) {
+                    if (minusNum == 0) {
+                        minusNum += 8;
+                    } else {
+                        minusNum = minusNum.toString();
+                        minusNum += "8";
+                        parseFloat(minusNum);
+                    }
+                    document.getElementById("numBar").innerHTML = minusNum;
+                } else if (num == 0) {
+                    num += 8;
+                    document.getElementById("numBar").innerHTML = num;
                 } else {
-                    multiply = multiply.toString();
-                    multiplyNum += "8";
-                    parseFloat(multiplyNum);
+                    num = num.toString();
+                    num += "8";
+                    num = parseFloat(num);
+                    document.getElementById("numBar").innerHTML = num;
                 }
-                document.getElementById("numBar").innerHTML = multiplyNum;
-            } else if (divideOn == true) {
-                if (divideNum == 0) {
-                    divideNum += 8;
-                } else {
-                    divideNum = divideNum.toString();
-                    divideNum += "8";
-                    parseFloat(divideNum);
-                }
-                document.getElementById("numBar").innerHTML = divideNum;
-            } else if (plusOn == true) {
-                if (plusNum == 0) {
-                    plusNum += 8;
-                } else {
-                    plusNum = plusNum.toString();
-                    plusNum += "8";
-                    parseFloat(minusNum);
-                }
-                document.getElementById("numBar").innerHTML = plusNum;
-            } else if (minusOn == true) {
-                if (minusNum == 0) {
-                    minusNum += 8;
-                } else {
-                    minusNum = minusNum.toString();
-                    minusNum += "8";
-                    parseFloat(minusNum);
-                }
-                document.getElementById("numBar").innerHTML = minusNum;
-            } else if (num == 0) {
-                num += 8;
-                document.getElementById("numBar").innerHTML = num;
-            } else {
-                num = num.toString();
-                num += "8";
-                parseFloat(num);
-                document.getElementById("numBar").innerHTML = num;
             }
         }
 
         function num9() {
-            if (multiplyOn == true) {
-                if (multiplyNum == 0) {
-                    multiplyNum += 9;
+            if (typedNum <= 15) {
+                typedNum++;
+                if (multiplyOn == true) {
+                    if (multiplyNum == 0) {
+                        multiplyNum += 9;
+                    } else {
+                        multiply = multiply.toString();
+                        multiplyNum += "9";
+                        parseFloat(multiplyNum);
+                    }
+                    document.getElementById("numBar").innerHTML = multiplyNum;
+                } else if (divideOn == true) {
+                    if (divideNum == 0) {
+                        divideNum += 9;
+                    } else {
+                        divideNum = divideNum.toString();
+                        divideNum += "9";
+                        parseFloat(divideNum);
+                    }
+                    document.getElementById("numBar").innerHTML = divideNum;
+                } else if (plusOn == true) {
+                    if (plusNum == 0) {
+                        plusNum += 9;
+                    } else {
+                        plusNum = plusNum.toString();
+                        plusNum += "9";
+                        parseFloat(minusNum);
+                    }
+                    document.getElementById("numBar").innerHTML = plusNum;
+                } else if (minusOn == true) {
+                    if (minusNum == 0) {
+                        minusNum += 9;
+                    } else {
+                        minusNum = minusNum.toString();
+                        minusNum += "9";
+                        parseFloat(minusNum);
+                    }
+                    document.getElementById("numBar").innerHTML = minusNum;
+                } else if (num == 0) {
+                    num += 9;
+                    document.getElementById("numBar").innerHTML = num;
                 } else {
-                    multiply = multiply.toString();
-                    multiplyNum += "9";
-                    parseFloat(multiplyNum);
+                    num = num.toString();
+                    num += "9";
+                    num = parseFloat(num);
+                    document.getElementById("numBar").innerHTML = num;
                 }
-                document.getElementById("numBar").innerHTML = multiplyNum;
-            } else if (divideOn == true) {
-                if (divideNum == 0) {
-                    divideNum += 9;
-                } else {
-                    divideNum = divideNum.toString();
-                    divideNum += "9";
-                    parseFloat(divideNum);
-                }
-                document.getElementById("numBar").innerHTML = divideNum;
-            } else if (plusOn == true) {
-                if (plusNum == 0) {
-                    plusNum += 9;
-                } else {
-                    plusNum = plusNum.toString();
-                    plusNum += "9";
-                    parseFloat(minusNum);
-                }
-                document.getElementById("numBar").innerHTML = plusNum;
-            } else if (minusOn == true) {
-                if (minusNum == 0) {
-                    minusNum += 9;
-                } else {
-                    minusNum = minusNum.toString();
-                    minusNum += "9";
-                    parseFloat(minusNum);
-                }
-                document.getElementById("numBar").innerHTML = minusNum;
-            } else if (num == 0) {
-                num += 9;
-                document.getElementById("numBar").innerHTML = num;
-            } else {
-                num = num.toString();
-                num += "9";
-                parseFloat(num);
-                document.getElementById("numBar").innerHTML = num;
             }
         }
 
         function decimal() {
-            if (minusOn == true) {
-                minusNum = minusNum.toString();
-                minusNum += ".";
-                parseFloat(minusNum);
-                document.getElementById("numBar").innerHTML = minusNum;
-            } else if (num.includes(".") == false) {
-                num = num.toString();
-                decimalPoint = true;
-                num += ".";
-                parseFloat(num);
-                document.getElementById("numBar").innerHTML = num;
+            if (typedNum <= 14) {
+                typedNum++;
+                if (multiplyOn == true) {
+                    multiply = multiply.toString();
+                    multiplyNum += ".";
+                    parseFloat(multiplyNum);
+                    document.getElementById("numBar").innerHTML = multiplyNum;
+                } else if (divideOn == true) {
+                    divideNum = divideNum.toString();
+                    divideNum += ".";
+                    parseFloat(divideNum);
+                    document.getElementById("numBar").innerHTML = divideNum;
+                } else if (plusOn == true) {
+                    plusNum = plusNum.toString();
+                    plusNum += ".";
+                    parseFloat(minusNum);
+                    document.getElementById("numBar").innerHTML = plusNum;
+                } else if (minusOn == true) {
+                    minusNum = minusNum.toString();
+                    minusNum += ".";
+                    parseFloat(minusNum);
+                    document.getElementById("numBar").innerHTML = minusNum;
+                } else if (decimalPoint == false) {
+                    decimalPoint = true;
+                    num = num.toString();
+                    num += ".";
+                    document.getElementById("numBar").innerHTML = num;
+                }
             }
         }
 
         function equals() {
-            if (multiplyOn == true) {
+            if (multiplyOn == true && multiplyNum != 0) {
                 num *= multiplyNum;
                 multiplyNum = 0;
             }
 
-            if (divideOn == true) {
+            if (divideOn == true && divideNum != 0) {
                 num /= divideNum;
                 divideNum = 0;
             }
 
-            if (plusOn == true) {
+            if (plusOn == true && plusNum != 0) {
                 num += plusNum;
                 plusNum = 0;
             }
 
-            if (minusOn == true) {
+            if (minusOn == true && minusNum != 0) {
                 num -= minusNum;
                 minusNum = 0;
             }
-
-            document.getElementById("numBar").innerHTML = num;
 
             multiplyOn = false;
             divideOn = false;
             plusOn = false;
             minusOn = false;
+
+            typedNum = 0;
+            document.getElementById("numBar").innerHTML = num;
+
+            clearBorders();
         }
 
         function minus() {
-            if (multiplyOn == true) {
+            if (multiplyOn == true && multiplyNum != 0) {
                 num *= multiplyNum;
                 multiplyNum = 0;
             }
 
-            if (divideOn == true) {
+            if (divideOn == true && divideNum != 0) {
                 num /= divideNum;
                 divideNum = 0;
             }
 
-            if (plusOn == true) {
+            if (plusOn == true && plusNum != 0) {
                 num += plusNum;
                 plusNum = 0;
             }
 
-            if (minusOn == true) {
+            if (minusOn == true && minusNum != 0) {
                 num -= minusNum;
                 minusNum = 0;
             }
-
-            document.getElementById("numBar").innerHTML = num;
 
             multiplyOn = false;
             divideOn = false;
             plusOn = false;
             minusOn = true;
+
+            typedNum = 0;
+
+            clearBorders();
+            document.getElementById("numBar").innerHTML = num;
+            document.getElementById("minus").style.border = "2.5px solid red";
         }
 
         function plus() {
-            if (multiplyOn == true) {
+            if (multiplyOn == true && multiplyNum != 0) {
                 num *= multiplyNum;
                 multiplyNum = 0;
             }
 
-            if (divideOn == true) {
+            if (divideOn == true && divideNum != 0) {
                 num /= divideNum;
                 divideNum = 0;
             }
 
-            if (plusOn == true) {
+            if (plusOn == true && plusNum != 0) {
                 num += plusNum;
                 plusNum = 0;
             }
 
-            if (minusOn == true) {
+            if (minusOn == true && minusNum != 0) {
                 num -= minusNum;
                 minusNum = 0;
             }
-
-            document.getElementById("numBar").innerHTML = num;
 
             multiplyOn = false;
             divideOn = false;
             plusOn = true;
             minusOn = false;
+
+            typedNum = 0;
+
+            clearBorders();
+            document.getElementById("numBar").innerHTML = num;
+            document.getElementById("plus").style.border = "2.5px solid red";
         }
 
         function multiply() {
-            if (multiplyOn == true) {
+            if (multiplyOn == true && multiplyNum != 0) {
                 num *= multiplyNum;
                 multiplyNum = 0;
             }
 
-            if (divideOn == true) {
+            if (divideOn == true && divideNum != 0) {
                 num /= divideNum;
                 divideNum = 0;
             }
 
-            if (plusOn == true) {
+            if (plusOn == true && plusNum != 0) {
                 num += plusNum;
                 plusNum = 0;
             }
 
-            if (minusOn == true) {
+            if (minusOn == true && minusNum != 0) {
                 num -= minusNum;
                 minusNum = 0;
             }
-
-            document.getElementById("numBar").innerHTML = num;
 
             multiplyOn = true;
             divideOn = false;
             plusOn = false;
             minusOn = false;
+
+            typedNum = 0;
+
+            clearBorders();
+            document.getElementById("numBar").innerHTML = num;
+            document.getElementById("multiply").style.border = "2.5px solid red";
         }
 
         function divide() {
-            if (multiplyOn == true) {
+            if (multiplyOn == true && multiplyNum != 0) {
                 num *= multiplyNum;
                 multiplyNum = 0;
             }
 
-            if (divideOn == true) {
+            if (divideOn == true && divideNum != 0) {
                 num /= divideNum;
                 divideNum = 0;
             }
 
-            if (plusOn == true) {
+            if (plusOn == true && plusNum != 0) {
                 num += plusNum;
                 plusNum = 0;
             }
 
-            if (minusOn == true) {
+            if (minusOn == true && minusNum != 0) {
                 num -= minusNum;
                 minusNum = 0;
             }
-
-            document.getElementById("numBar").innerHTML = num;
 
             multiplyOn = false;
             divideOn = true;
             plusOn = false;
             minusOn = false;
+
+            typedNum = 0;
+
+            var saveNum = num;
+
+            reset();
+
+            num = saveNum;
+
+            document.getElementById("numBar").innerHTML = num;
+            document.getElementById("divide").style.border = "2.5px solid red";
         }
+
+        function mPlus() {
+            memory += parseFloat(document.getElementById("numBar").textContent);
+            alert(memory);
+        }
+
+        function reset() {
+            clearBorders();
+
+            var num = 0;
+            var typedNum = 0;
+            var minusNum = 0;
+            var minusOn = false;
+            var plusNum = 0;
+            var plusOn = false;
+            var divideNum = 0;
+            var divideOn = false;
+            var multiplyNum = 0;
+            var multiplyOn = false;
+            var decimalPoint = false;
+
+            document.getElementById("numBar").innerHTML = num;
+        }
+
+        function clearBorders() {
+            document.getElementById("minus").style.border = "2.5px solid white";
+            document.getElementById("plus").style.border = "2.5px solid white";
+            document.getElementById("multiply").style.border = "2.5px solid white";
+            document.getElementById("divide").style.border = "2.5px solid white";
+        }
+
+        document.onkeydown = function (e) {
+            if (e.which == 48) {
+                num0();
+            } else if (e.key == 1) {
+                num1();
+            } else if (e.key == 2) {
+                num2();
+            } else if (e.key == 3) {
+                num3();
+            } else if (e.key == 4) {
+                num4();
+            } else if (e.key == 5) {
+                num5();
+            } else if (e.key == 6) {
+                num6();
+            } else if (e.key == 7) {
+                num7();
+            } else if (e.key == 8) {
+                num8();
+            } else if (e.key == 9) {
+                num9();
+            } else if (e.key == ".") {
+                decimal();
+            } else if (e.key == "+") {
+                plus();
+            } else if (e.key == "-") {
+                minus();
+            } else if (e.key == "*") {
+                multiply();
+            } else if (e.key == "/") {
+                divide();
+            }
+        };
     </script>
 </body>
 
