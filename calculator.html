@@ -108,7 +108,7 @@
         var decimalPoint = false;
 
         function num0() {
-            if ((Math.ceil(Math.log10(num + 1))) <= 15) {
+            if (typedNum <= 15) {
                 typedNum++;
                 if (multiplyOn == true && multiplyNum != 0) {
                     multiply = multiply.toString();
@@ -140,7 +140,7 @@
         }
 
         function num1() {
-            if ((Math.ceil(Math.log10(num + 1))) <= 15) {
+            if (typedNum <= 15) {
                 typedNum++;
                 if (multiplyOn == true) {
                     if (multiplyNum == 0) {
@@ -179,6 +179,7 @@
                     }
                     document.getElementById("numBar").innerHTML = minusNum;
                 } else if (num == 0) {
+                    alert("if num == 0");
                     num += 1;
                     document.getElementById("numBar").innerHTML = num;
                 } else {
@@ -656,10 +657,12 @@
             plusOn = false;
             minusOn = false;
 
-            typedNum = 0;
-            document.getElementById("numBar").innerHTML = num;
-
             clearBorders();
+
+            document.getElementById("numBar").innerHTML = num;
+            document.getElementById("divide").style.border = "2.5px solid red";
+
+            clearVar();
         }
 
         function minus() {
@@ -691,8 +694,11 @@
             typedNum = 0;
 
             clearBorders();
+
             document.getElementById("numBar").innerHTML = num;
-            document.getElementById("minus").style.border = "2.5px solid red";
+            document.getElementById("divide").style.border = "2.5px solid red";
+
+            clearVar();
         }
 
         function plus() {
@@ -724,8 +730,11 @@
             typedNum = 0;
 
             clearBorders();
+
             document.getElementById("numBar").innerHTML = num;
-            document.getElementById("plus").style.border = "2.5px solid red";
+            document.getElementById("divide").style.border = "2.5px solid red";
+
+            clearVar();
         }
 
         function multiply() {
@@ -757,8 +766,11 @@
             typedNum = 0;
 
             clearBorders();
+
             document.getElementById("numBar").innerHTML = num;
-            document.getElementById("multiply").style.border = "2.5px solid red";
+            document.getElementById("divide").style.border = "2.5px solid red";
+
+            clearVar();
         }
 
         function divide() {
@@ -789,14 +801,12 @@
 
             typedNum = 0;
 
-            var saveNum = num;
-
-            reset();
-
-            num = saveNum;
+            clearBorders();
 
             document.getElementById("numBar").innerHTML = num;
             document.getElementById("divide").style.border = "2.5px solid red";
+
+            clearVar();
         }
 
         function mPlus() {
@@ -806,20 +816,24 @@
 
         function reset() {
             clearBorders();
-
-            var num = 0;
-            var typedNum = 0;
-            var minusNum = 0;
-            var minusOn = false;
-            var plusNum = 0;
-            var plusOn = false;
-            var divideNum = 0;
-            var divideOn = false;
-            var multiplyNum = 0;
-            var multiplyOn = false;
-            var decimalPoint = false;
+            clearVar();
 
             document.getElementById("numBar").innerHTML = num;
+        }
+
+        function clearVar() {
+            num = 0;
+            typedNum = 0;
+            memory = 0;
+            minusNum = 0;
+            minusOn = false;
+            plusNum = 0;
+            plusOn = false;
+            divideNum = 0;
+            divideOn = false;
+            multiplyNum = 0;
+            multiplyOn = false;
+            decimalPoint = false;
         }
 
         function clearBorders() {
