@@ -39,7 +39,6 @@
             opacity: 0.4;
             filter: alpha(opacity=40);
         }
-        
     </style>
 </head>
 
@@ -117,25 +116,25 @@
         var square9 = false;
 
         player1 = prompt("Player 1, please type in your name.", "X");
-        while (player1 == "") {
+        while (player1 == "" || player1 == null) {
             player1 = prompt("Player 1, please type in your name.", "X");
         }
         player2 = prompt("Player 2, please type in your name.", "O");
-        while (player2 == "" || player2 == player1) {
-            if (player2 == "") {
+        while (player2 == "" || player2 == null || player2 == player1) {
+            if (player2 == "" || player2 == null) {
                 player2 = prompt("Player 2, please type in your name.", "O");
             }
             if (player2 == player1) {
                 player2 = prompt("Player 2, please type a name different to Player 1.", "O");
             }
         }
-        alert(player1 + ", it is your turn to play.");
-        for (var i = 1; i < 10; i++) {
-            document.getElementById(i + "x").style.display = "block";
-        }
+        X();
 
         function O() {
             alert(player2 + ", it is your turn to play.");
+            for (var i = 1; i < 10; i++) {
+                document.getElementById(i + "o").style.filter = "invert(9%) sepia(99%) saturate(6509%) hue-rotate(247deg) brightness(94%) contrast(147%)";
+            }
             if (gameOver == false) {
                 if (square1 == false) {
                     document.getElementById("1x").style.display = "none";
@@ -178,6 +177,9 @@
 
         function X() {
             alert(player1 + ", it is your turn to play.");
+            for (var i = 1; i < 10; i++) {
+                document.getElementById(i + "x").style.filter = "invert(11%) sepia(96%) saturate(6472%) hue-rotate(358deg) brightness(94%) contrast(114%)";
+            }
             if (gameOver == false) {
                 if (square1 == false) {
                     document.getElementById("1x").style.display = "block";
@@ -221,7 +223,7 @@
         function X1() {
             if (square1 == false) {
                 square1 = true;
-                totalUsedSquares ++;
+                totalUsedSquares++;
                 d1 -= 1;
                 v1 -= 1;
                 h1 -= 1;
@@ -241,7 +243,7 @@
         function O1() {
             if (square1 == false) {
                 square1 = true;
-                totalUsedSquares ++;
+                totalUsedSquares++;
                 d1 += 1;
                 v1 += 1;
                 h1 += 1;
@@ -261,7 +263,7 @@
         function X2() {
             if (square2 == false) {
                 square2 = true;
-                totalUsedSquares ++;
+                totalUsedSquares++;
                 v2 -= 1;
                 h1 -= 1;
                 document.getElementById("2x").style.opacity = "1.0";
@@ -280,7 +282,7 @@
         function O2() {
             if (square2 == false) {
                 square2 = true;
-                totalUsedSquares ++;
+                totalUsedSquares++;
                 v2 += 1;
                 h1 += 1;
                 document.getElementById("2o").style.opacity = "1.0";
@@ -299,7 +301,7 @@
         function X3() {
             if (square3 == false) {
                 square3 = true;
-                totalUsedSquares ++;
+                totalUsedSquares++;
                 d2 -= 1;
                 v3 -= 1;
                 h1 -= 1;
@@ -319,7 +321,7 @@
         function O3() {
             if (square3 == false) {
                 square3 = true;
-                totalUsedSquares ++;
+                totalUsedSquares++;
                 d2 += 1;
                 v3 += 1;
                 h1 += 1;
@@ -339,7 +341,7 @@
         function X4() {
             if (square4 == false) {
                 square4 = true;
-                totalUsedSquares ++;
+                totalUsedSquares++;
                 v1 -= 1;
                 h2 -= 1;
                 document.getElementById("4x").style.opacity = "1.0";
@@ -358,7 +360,7 @@
         function O4() {
             if (square4 == false) {
                 square4 = true;
-                totalUsedSquares ++;
+                totalUsedSquares++;
                 v1 += 1;
                 h2 += 1;
                 document.getElementById("4o").style.opacity = "1.0";
@@ -377,7 +379,7 @@
         function X5() {
             if (square5 == false) {
                 square5 = true;
-                totalUsedSquares ++;
+                totalUsedSquares++;
                 d1 -= 1;
                 d2 -= 1;
                 h2 -= 1;
@@ -398,7 +400,7 @@
         function O5() {
             if (square5 == false) {
                 square5 = true;
-                totalUsedSquares ++;
+                totalUsedSquares++;
                 d1 += 1;
                 d2 += 1;
                 h2 += 1;
@@ -419,7 +421,7 @@
         function X6() {
             if (square6 == false) {
                 square6 = true;
-                totalUsedSquares ++;
+                totalUsedSquares++;
                 v3 -= 1;
                 h2 -= 1;
                 document.getElementById("6x").style.opacity = "1.0";
@@ -438,7 +440,7 @@
         function O6() {
             if (square6 == false) {
                 square6 = true;
-                totalUsedSquares ++;
+                totalUsedSquares++;
                 v3 += 1;
                 h2 += 1;
                 document.getElementById("6o").style.opacity = "1.0";
@@ -457,7 +459,7 @@
         function X7() {
             if (square7 == false) {
                 square7 = true;
-                totalUsedSquares ++;
+                totalUsedSquares++;
                 d2 -= 1;
                 v1 -= 1;
                 h3 -= 1;
@@ -477,7 +479,7 @@
         function O7() {
             if (square7 == false) {
                 square7 = true;
-                totalUsedSquares ++;
+                totalUsedSquares++;
                 d2 += 1;
                 v1 += 1;
                 h3 += 1;
@@ -497,7 +499,7 @@
         function X8() {
             if (square8 == false) {
                 square8 = true;
-                totalUsedSquares ++;
+                totalUsedSquares++;
                 v2 -= 1;
                 h3 -= 1;
                 document.getElementById("8x").style.opacity = "1.0";
@@ -516,7 +518,7 @@
         function O8() {
             if (square8 == false) {
                 square8 = true;
-                totalUsedSquares ++;
+                totalUsedSquares++;
                 v2 += 1;
                 h3 += 1;
                 document.getElementById("8o").style.opacity = "1.0";
@@ -535,7 +537,7 @@
         function X9() {
             if (square9 == false) {
                 square9 = true;
-                totalUsedSquares ++;
+                totalUsedSquares++;
                 d1 -= 1;
                 v3 -= 1;
                 h3 -= 1;
@@ -555,7 +557,7 @@
         function O9() {
             if (square9 == false) {
                 square9 = true;
-                totalUsedSquares ++;
+                totalUsedSquares++;
                 d1 += 1;
                 v3 += 1;
                 h3 += 1;
