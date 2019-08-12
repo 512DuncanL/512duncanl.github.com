@@ -10,3 +10,4 @@ Site: [https://512duncanl.github.io](https://512duncanl.github.io)
 ## Others
 - [Clicking Speed Test](https://512duncanl.github.io/clicking-speed-test.html)
 - [Calculator](https://512duncanl.github.io/calculator.html)
+- [Pixel Art](https://512duncanl.github.io/pixel-art.html)
