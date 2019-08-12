@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style>
+        body {
+            font-family: sans-serif;
+            font-size: 20px;
+            margin: 0;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            -ms-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%);
+        }
+
+        body,
+        table,
+        h1 {
+            margin: auto;
+            text-align: center;
+        }
+
+        input {
+            width: 50px;
+        }
+
+        table {
+            border-collapse: collapse;
+        }
+
+        td {
+            padding: 15px;
+            border: 5px solid black;
+        }
+
+        #palette {
+            border-collapse: separate;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Pixel Art</h1>
+    <p>Grid Size: <input type="number" id="width" min="5" value="9"> (width) by <input type="number" id="height" min="5"
+            value="9"> (height) <button onclick="changeSize()">CHANGE SIZE</button></p>
+
+    <table id="table">
+    </table>
+    <p>Color Palette</p>
+    <table id="palette">
+        <tr>
+            <td id="black" onclick="colorBlack()" style="background-color: black; border-color: blue"></td>
+            <td id="white" onclick="colorWhite()"></td>
+            <td id="brown" onclick="colorBrown()" style="background-color: saddlebrown"></td>
+            <td id="red" onclick="colorRed()" style="background-color: red"></td>
+            <td id="yellow" onclick="colorYellow()" style="background-color: yellow"></td>
+            <td id="green" onclick="colorGreen()" style="background-color: green"></td>
+            <td id="blue" onclick="colorBlue()" style="background-color: blue"></td>
+        </tr>
+    </table>
+    <button onclick="">DOWNLOAD PIXEL ART</button>
+    <script>
+        //SETUP
+        var table = document.getElementById("table");
+        var col = 9;
+        var colorPicked = "black";
+        for (let i = 0; i < 9; i++) {
+            var row = table.insertRow(0);
+            for (let i = 0; i < 9; i++) {
+                let cell = row.insertCell(0);
+                cell.innerHTML = "";
+                cell.setAttribute('onclick', 'color(this)');
+            }
+        }
+
+        //MAIN
+        function colorBlack() {
+            colorPicked = "black";
+            document.getElementById("black").style.borderColor = "blue";
+            document.getElementById("white").style.borderColor = "black";
+            document.getElementById("brown").style.borderColor = "black";
+            document.getElementById("red").style.borderColor = "black";
+            document.getElementById("yellow").style.borderColor = "black";
+            document.getElementById("green").style.borderColor = "black";
+            document.getElementById("blue").style.borderColor = "black";
+        }
+
+        function colorWhite() {
+            colorPicked = "white";
+            document.getElementById("black").style.borderColor = "black";
+            document.getElementById("white").style.borderColor = "blue";
+            document.getElementById("brown").style.borderColor = "black";
+            document.getElementById("red").style.borderColor = "black";
+            document.getElementById("yellow").style.borderColor = "black";
+            document.getElementById("green").style.borderColor = "black";
+            document.getElementById("blue").style.borderColor = "black";
+        }
+
+        function colorBrown() {
+            colorPicked = "brown";
+            document.getElementById("black").style.borderColor = "black";
+            document.getElementById("white").style.borderColor = "black";
+            document.getElementById("brown").style.borderColor = "blue";
+            document.getElementById("red").style.borderColor = "black";
+            document.getElementById("yellow").style.borderColor = "black";
+            document.getElementById("green").style.borderColor = "black";
+            document.getElementById("blue").style.borderColor = "black";
+        }
+
+        function colorRed() {
+            colorPicked = "red";
+            document.getElementById("black").style.borderColor = "black";
+            document.getElementById("white").style.borderColor = "black";
+            document.getElementById("brown").style.borderColor = "black";
+            document.getElementById("red").style.borderColor = "blue";
+            document.getElementById("yellow").style.borderColor = "black";
+            document.getElementById("green").style.borderColor = "black";
+            document.getElementById("blue").style.borderColor = "black";
+        }
+
+        function colorGreen() {
+            colorPicked = "green";
+            document.getElementById("black").style.borderColor = "black";
+            document.getElementById("white").style.borderColor = "black";
+            document.getElementById("brown").style.borderColor = "black";
+            document.getElementById("red").style.borderColor = "black";
+            document.getElementById("yellow").style.borderColor = "black";
+            document.getElementById("green").style.borderColor = "blue";
+            document.getElementById("blue").style.borderColor = "black";
+        }
+
+        function colorBlue() {
+            colorPicked = "blue";
+            document.getElementById("black").style.borderColor = "black";
+            document.getElementById("white").style.borderColor = "black";
+            document.getElementById("brown").style.borderColor = "black";
+            document.getElementById("red").style.borderColor = "black";
+            document.getElementById("yellow").style.borderColor = "black";
+            document.getElementById("green").style.borderColor = "black";
+            document.getElementById("blue").style.borderColor = "blue";
+        }
+
+        function colorYellow() {
+            colorPicked = "yellow";
+            document.getElementById("black").style.borderColor = "black";
+            document.getElementById("white").style.borderColor = "black";
+            document.getElementById("brown").style.borderColor = "black";
+            document.getElementById("red").style.borderColor = "black";
+            document.getElementById("yellow").style.borderColor = "blue";
+            document.getElementById("green").style.borderColor = "black";
+            document.getElementById("blue").style.borderColor = "black";
+        }
+
+        function color(pixel) {
+            if (colorPicked == "black") {
+                pixel.style.backgroundColor = "black";
+            } else if (colorPicked == "white") {
+                pixel.style.backgroundColor = "white";
+            } else if (colorPicked == "brown") {
+                pixel.style.backgroundColor = "saddlebrown";
+            } else if (colorPicked == "red") {
+                pixel.style.backgroundColor = "red";
+            } else if (colorPicked == "green") {
+                pixel.style.backgroundColor = "green";
+            } else if (colorPicked == "blue") {
+                pixel.style.backgroundColor = "blue";
+            } else if (colorPicked == "yellow") {
+                pixel.style.backgroundColor = "yellow";
+            }
+        }
+
+        function changeSize() {
+            var height = document.getElementById("height").value;
+            var width = document.getElementById("width").value;
+            if (height < 5) {
+                height = 5;
+                document.getElementById("height").value = 5;
+            }
+
+            if (width < 5) {
+                width = 5;
+                document.getElementById("width").value = 5;
+            }
+
+            while (height != document.getElementById("table").rows.length || width != col) {
+                if (width < col) {
+                    minusColumn();
+                } else if (width > col) {
+                    addColumn();
+                }
+
+                if (height < document.getElementById("table").rows.length) {
+                    minusRow();
+                } else if (height > document.getElementById("table").rows.length) {
+                    addRow();
+                }
+            }
+        }
+
+        function addRow() {
+            let row = table.insertRow(0);
+            for (let i = 0; i < col; i++) {
+                let cell = row.insertCell(0);
+                cell.innerHTML = "";
+                cell.setAttribute('onclick', 'color(this)');
+            }
+        }
+
+        function addColumn() {
+            let row = document.getElementById("table").rows.length;
+            for (let i = 0; i < row; i++) {
+                table.rows[i].innerHTML += "<td onclick=\"color(this)\"></td>";
+            }
+            col++;
+        }
+
+        function minusRow() {
+            let lastRow = document.getElementById("table").rows.length - 1;
+            table.deleteRow(0);
+        }
+
+        function minusColumn() {
+            let row = document.getElementById("table").rows.length;
+            for (let i = 0; i < row; i++) {
+                table.rows[i].deleteCell(0);
+            }
+            col--;
+        }
+    </script>
+</body>
+
+</html>
