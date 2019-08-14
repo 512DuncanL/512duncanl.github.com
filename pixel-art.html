@@ -4,14 +4,10 @@
 <head>
     <style>
         body {
-            font-family: sans-serif;
             font-size: 20px;
-            margin: 0;
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            -ms-transform: translate(-50%, -50%);
-            transform: translate(-50%, -50%);
+            font-family: Arial, sans-serif;
+            overflow: scroll;
+            text-align: center;
         }
 
         body,
@@ -19,10 +15,6 @@
         h1 {
             margin: auto;
             text-align: center;
-        }
-
-        input {
-            width: 50px;
         }
 
         table {
@@ -37,13 +29,24 @@
         #palette {
             border-collapse: separate;
         }
+
+        .size {
+            width: 50px;
+        }
     </style>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.22/pdfmake.min.js"></script>
+    <script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
 </head>
 
 <body>
+    <br>
+    <br>
     <h1>Pixel Art</h1>
-    <p>Grid Size: <input type="number" id="width" min="5" value="9"> (width) by <input type="number" id="height" min="5"
-            value="9"> (height) <button onclick="changeSize()">CHANGE SIZE</button></p>
+    <p>Grid Size: <input class="size" type="number" id="width" min="5" value="9"> (width) by <input class="size"
+            type="number" id="height" min="5" value="9"> (height) <button onclick="changeSize()">CHANGE SIZE</button>
+    </p>
 
     <table id="table">
     </table>
@@ -59,7 +62,8 @@
             <td id="blue" onclick="colorBlue()" style="background-color: blue"></td>
         </tr>
     </table>
-    <button onclick="">DOWNLOAD PIXEL ART</button>
+    <br>
+    <input type="button" onclick="downloadPixelArt()" value="Download Pixel Art (PDF)" />
     <script>
         //SETUP
         var table = document.getElementById("table");
@@ -75,6 +79,21 @@
         }
 
         //MAIN
+        function downloadPixelArt() {
+            html2canvas($('#table')[0], {
+                onrendered: function (canvas) {
+                    var data = canvas.toDataURL();
+                    var docDefinition = {
+                        content: [{
+                            image: data,
+                            width: 500
+                        }]
+                    };
+                    pdfMake.createPdf(docDefinition).download("Pixel Art.pdf");
+                }
+            });
+        }
+
         function colorBlack() {
             colorPicked = "black";
             document.getElementById("black").style.borderColor = "blue";
