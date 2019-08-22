@@ -65,7 +65,7 @@
         </tr>
     </table>
     <br>
-    <input type="button" onclick="downloadPixelArt()" value="Download Pixel Art (PDF)">
+    <input type="button" onclick="downloadPixelArt()" value="DOWNLOAD PIXEL ART (PDF)">
     <br>
     <br>
     <script>
@@ -73,16 +73,29 @@
         var table = document.getElementById("table");
         var col = 9;
         var colorPicked = "black";
+        var mouseDown = false;
         for (let i = 0; i < 9; i++) {
             var row = table.insertRow(0);
             for (let i = 0; i < 9; i++) {
                 let cell = row.insertCell(0);
                 cell.innerHTML = "";
-                cell.setAttribute('onclick', 'color(this)');
+                cell.setAttribute('onmouseover', 'dragColor(this)');
+                cell.setAttribute('onclick', 'clickColor(this)');
             }
         }
 
         //MAIN
+        document.onmousedown = mouseIsDown;
+        document.onmouseup = mouseIsUp;
+
+        function mouseIsDown() {
+            mouseDown = true;
+        }
+
+        function mouseIsUp() {
+            mouseDown = false;
+        }
+
         function downloadPixelArt() {
             html2canvas($('#table')[0], {
                 onrendered: function (canvas) {
@@ -175,7 +188,27 @@
             document.getElementById("blue").style.borderColor = "black";
         }
 
-        function color(pixel) {
+        function dragColor(pixel) {
+            if (mouseDown == true) {
+                if (colorPicked == "black") {
+                    pixel.style.backgroundColor = "black";
+                } else if (colorPicked == "white") {
+                    pixel.style.backgroundColor = "white";
+                } else if (colorPicked == "brown") {
+                    pixel.style.backgroundColor = "saddlebrown";
+                } else if (colorPicked == "red") {
+                    pixel.style.backgroundColor = "red";
+                } else if (colorPicked == "green") {
+                    pixel.style.backgroundColor = "green";
+                } else if (colorPicked == "blue") {
+                    pixel.style.backgroundColor = "blue";
+                } else if (colorPicked == "yellow") {
+                    pixel.style.backgroundColor = "yellow";
+                }
+            }
+        }
+
+        function clickColor(pixel) {
             if (colorPicked == "black") {
                 pixel.style.backgroundColor = "black";
             } else if (colorPicked == "white") {
@@ -206,14 +239,14 @@
                 document.getElementById("width").value = 5;
             }
 
-            if (height > 40) {
-                height = 40;
-                document.getElementById("height").value = 40;
+            if (height > 60) {
+                height = 60;
+                document.getElementById("height").value = 60;
             }
 
-            if (width > 40) {
-                width = 40;
-                document.getElementById("width").value = 40;
+            if (width > 60) {
+                width = 60;
+                document.getElementById("width").value = 60;
             }
 
             while (height != document.getElementById("table").rows.length || width != col) {
@@ -269,6 +302,21 @@
                     palette[i].style.padding = "15px";
                 }
             }
+
+            if ((height > 40 && height <= 60) || (width > 40 && width <= 60)) {
+                let td = document.getElementsByTagName("td");
+                let palette = document.getElementsByClassName("palette");
+
+                for (let i = 0; i < td.length; i++) {
+                    td[i].style.padding = "5px";
+                    td[i].style.borderWidth = "1.5px";
+                }
+
+                for (let i = 0; i < palette.length; i++) {
+                    palette[i].style.borderWidth = "5px";
+                    palette[i].style.padding = "15px";
+                }
+            }
         }
 
         function addRow() {
@@ -276,14 +324,15 @@
             for (let i = 0; i < col; i++) {
                 let cell = row.insertCell(0);
                 cell.innerHTML = "";
-                cell.setAttribute('onclick', 'color(this)');
+                cell.setAttribute('onclick', 'clickColor(this)');
+                cell.setAttribute('onmouseover', 'dragColor(this)');
             }
         }
 
         function addColumn() {
             let row = document.getElementById("table").rows.length;
             for (let i = 0; i < row; i++) {
-                table.rows[i].innerHTML += "<td onclick=\"color(this)\"></td>";
+                table.rows[i].innerHTML += "<td onclick=\"clickColor(this)\" onmouseover=\"dragColor(this)\"></td>";
             }
             col++;
         }
