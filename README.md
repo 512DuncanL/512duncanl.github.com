@@ -3,11 +3,11 @@ Site: [https://512duncanl.github.io](https://512duncanl.github.io)
 # 512DuncanL's random web projects
 
 ## Games
-- [The Lobster Game (Singleplayer)](https://512duncanl.github.io/lobster-game.html)
-- [Tic Tac Toe (Multiplayer)](https://512duncanl.github.io/tic-tac-toe.html)
+- [Tic Tac Toe (Multiplayer)](https://512duncanl.github.io/tic-tac-toe.html): A 2 player multiplayer game
 ## Sites
-- [Mycreeper (A Minecraft guide)](https://mycreeper.site)
+- [Mycreeper (A Minecraft guide)](https://mycreeper.site): A small guide about Minecraft
 ## Others
-- [Clicking Speed Test](https://512duncanl.github.io/clicking-speed-test.html)
-- [Calculator](https://512duncanl.github.io/calculator.html)
-- [Pixel Art](https://512duncanl.github.io/pixel-art.html)
+- [Clicking Speed Test](https://512duncanl.github.io/clicking-speed-test.html): Now with 4 different modes!
+- [Calculator](https://512duncanl.github.io/calculator.html): Your everyday calculator
+- [Pixel Art](https://512duncanl.github.io/pixel-art.html): 2 paint tools, 7 colors, and 3,136 different grid sizes!
+- [Timed Notifications](https://512duncanl.github.io/timed-notifications.html): A simple timer that uses notifications
