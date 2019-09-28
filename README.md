@@ -3,9 +3,10 @@ Site: [https://512duncanl.github.io](https://512duncanl.github.io)
 # 512DuncanL's random web projects
 
 ## Games
-- [Tic Tac Toe (Multiplayer)](https://512duncanl.github.io/tic-tac-toe.html): A 2 player multiplayer game
+- [Tic Tac Toe](https://512duncanl.github.io/tic-tac-toe.html): The multiplayer version of tic tac toe
 ## Sites
-- [Mycreeper (A Minecraft guide)](https://mycreeper.site): A small guide about Minecraft
+- [Mycreeper](https://mycreeper.site): A small guide about Minecraft
+- [Brawlalts](https://brawlalts.store): A joint project with emcbandit that sells alts
 ## Others
 - [Clicking Speed Test](https://512duncanl.github.io/clicking-speed-test.html): Now with 4 different modes!
 - [Calculator](https://512duncanl.github.io/calculator.html): Your everyday calculator
