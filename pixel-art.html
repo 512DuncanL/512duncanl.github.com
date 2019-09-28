@@ -71,8 +71,7 @@
     <br>
     <table id="palette">
         <tr>
-            <td class="palette" id="black" onclick="colorBlack()" style="background-color: black; border-color: blue">
-            </td>
+            <td class="palette" id="black" onclick="colorBlack()" style="background-color: black; border-color: blue"></td>
             <td class="palette" id="white" onclick="colorWhite()"></td>
             <td class="palette" id="brown" onclick="colorBrown()" style="background-color: saddlebrown"></td>
             <td class="palette" id="red" onclick="colorRed()" style="background-color: red"></td>
@@ -136,6 +135,7 @@
                 }
             });
             setTimeout(function () {
+                alert(height);
                 if (height <= 10 || width <= 10) {
                     for (let i = 0; i < td.length; i++) {
                         td[i].style.border = "5px solid";
@@ -340,8 +340,8 @@
         }
 
         function changeSize() {
-            var height = document.getElementById("height").value;
-            var width = document.getElementById("width").value;
+            height = document.getElementById("height").value;
+            width = document.getElementById("width").value;
             if (height < 5) {
                 height = 5;
                 document.getElementById("height").value = 5;
