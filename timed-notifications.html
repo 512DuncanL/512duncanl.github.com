@@ -14,7 +14,9 @@
             transform: translate(-50%, -50%);
         }
 
-        input, button, select {
+        input,
+        button,
+        select {
             font-size: 17.5px;
             text-align: center;
         }
@@ -33,18 +35,18 @@
 <body>
     <h1>Timed Notifications</h1>
     <br>
-    <p>Time between notifications: <input id="number" type="number" value="30" min="10" max="60">
-
-        <select id="select">
-            <option value="seconds">Seconds</option>
-            <option value="minutes">Minutes</option>
-            <option value="hours">Hours</option>
-        </select>
-    </p>
+    <p>Time between notifications: <input id="hours" type="number" value="0" min="0" max="6"> hours <input id="minutes"
+            type="number" value="5" min="0" max="60"> minutes <input id="seconds" type="number" value="0" min="0"
+            max="60"> seconds</p>
     <p>Notification Text: <input id="notificationText" type="text" value="Timer Done!"></p>
     <button onclick="notifyMe()">Start Nofifying Me!</button>
-    <button onclick="stopNotifyingMe()">Stop Nofifying Me!</button>
+    <button onclick="stopNotifyingMe(); alert('Timer Stopped')">Stop Nofifying Me!</button>
     <script>
+        if (Notification.permission !== 'granted') {
+            alert("You must allow this site to send you notifications for it to work.");
+            Notification.requestPermission();
+        }
+
         function stopNotifyingMe() {
             for (var i = 1; i < 99999; i++) {
                 window.clearInterval(i);
@@ -52,25 +54,44 @@
         }
 
         function notifyMe() {
+            stopNotifyingMe();
             var text = document.getElementById("notificationText").value;
-            var timeInput = document.getElementById("number").value;
+            var hours = document.getElementById("hours").value;
+            var minutes = document.getElementById("minutes").value;
+            var seconds = document.getElementById("seconds").value;
             var time;
 
-            if (timeInput < 10) {
-                timeInput = 10;
-                document.getElementById("number").value = 10;
-            } else if (timeInput > 60) {
-                timeInput = 60;
-                document.getElementById("number").value = 60;
+            if (hours < 0) {
+                hours = 0;
+                document.getElementById("hours").value = 0;
+            } else if (hours > 6) {
+                hours = 6;
+                document.getElementById("hours").value = 6;
             }
 
-            if (document.getElementById("select").value == "seconds") {
-                time = 1000 * timeInput;
-            } else if (document.getElementById("select").value == "minutes") {
-                time = 60000 * timeInput;
-            } else {
-                time = 3600000 * timeInput;
+            if (minutes < 0) {
+                minutes = 0;
+                document.getElementById("minutes").value = 0;
+            } else if (minutes > 60) {
+                minutes = 60;
+                document.getElementById("minutes").value = 60;
             }
+
+            if (seconds < 0) {
+                seconds = 0;
+                document.getElementById("seconds").value = 0;
+            } else if (seconds > 60) {
+                seconds = 60;
+                document.getElementById("seconds").value = 60;
+            }
+
+            time = (seconds * 1000) + (minutes * 60000) + (hours * 3600000);
+
+            if (time < 5000) {
+                time = 5000;
+                document.getElementById("seconds").value = 5;
+            }
+
             setInterval(function () {
                 if (!("Notification" in window)) {
                     alert("Sorry, your browser does not support notifications");
@@ -80,12 +101,9 @@
                     var notification = new Notification(text);
                 }
 
-                else if (Notification.permission !== 'denied') {
-                    Notification.requestPermission(function (permission) {
-                        if (permission === "granted") {
-                            var notification = new Notification(text);
-                        }
-                    });
+                else if (Notification.permission !== "granted") {
+                    alert("Please allow notifications for this site to work.");
+                    Notification.requestPermission();
                 }
             }, time);
 
