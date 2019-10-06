@@ -13,3 +13,4 @@ Site: [https://512duncanl.github.io](https://512duncanl.github.io)
 - [Calculator](https://512duncanl.github.io/calculator.html): Your everyday calculator
 - [Pixel Art](https://512duncanl.github.io/pixel-art.html): 2 paint tools, 7 colors, and 3,136 different grid sizes!
 - [Timed Notifications](https://512duncanl.github.io/timed-notifications.html): A simple timer that uses notifications
+- [Pastel Home Page](https://512duncanl.github.io/pastel-home-page.html): A home page with a pastel background that changes color
