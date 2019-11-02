@@ -126,12 +126,12 @@
         function ballResetL() {
             ballX = canvas.width / 2;
             ballY = canvas.height / 2;
-            ballSpeedX = -6.25;
+            ballSpeedX = -6 - Math.random()/2;
             ballSpeedY = 6.25;
             computerScore++;
 
             if (playerScore == WINNING_SCORE) {
-                setInterval(function () {
+                setTimeout(function () {
                     alert("PLAYER WINS")
                     computerScore = 0;
                     playerScore = 0;
@@ -142,12 +142,12 @@
         function ballResetR() {
             ballX = canvas.width / 2;
             ballY = canvas.height / 2;
-            ballSpeedX = 6.25;
+            ballSpeedX = 6 + Math.random()/2;
             ballSpeedY = 6.25;
             playerScore++;
 
             if (playerScore == WINNING_SCORE) {
-                setInterval(function () {
+                setTimeout(function () {
                     alert("PLAYER WINS")
                     computerScore = 0;
                     playerScore = 0;
