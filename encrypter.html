@@ -13,7 +13,7 @@
         h3 {
             font-size: 27.5px;
         }
-        
+
         p {
             min-height: 2em;
             min-width: 40vw;
@@ -24,6 +24,7 @@
 
         input {
             border-width: medium;
+            min-width: 150px;
         }
 
         button {
@@ -31,25 +32,44 @@
             margin: 7.5px auto;
         }
 
-        .label {
+        .label,
+        .radio {
             min-height: 0;
-            min-width: 0;
+            min-width: 0px;
             border: none;
             margin: 20px auto;
+        }
+
+        .radio {
+            display: inline-block;
+        }
+
+        #customKeyInput, #customKeyLabel {
+            display: none;
         }
     </style>
 </head>
 
 <body>
-    <h1>Number Encrypter</h1>
+    <h1>Text Encrypter</h1>
 
     <h3>Encrypt Text</h3>
+    <div>
+        <input type="radio" name="keyInput" value="random" checked="checked" id="randomKey">
+        <p class="radio">&nbsp;Random Key</p>
+        &nbsp;&nbsp;
+        <input type="radio" name="keyInput" value="custom" id="customKey">
+        <p class="radio">&nbsp;Custom Key</p>
+    </div>
+    <p class="label">Text Input</p>
     <input type="text" id="textInput">
+    <p id="customKeyLabel" class="label">Custom Key Input</p>
+    <input type="text" id="customKeyInput">
     <button onclick="encode()">Encrypt</button>
     <p class="label">Encoded Text:</p>
     <p id="numberOutput"></p>
-    <p class="label">Key:</p>
-    <p id="codeOutput"></p>
+    <p id="keyOutputLabel" class="label">Key:</p>
+    <p id="keyOutput"></p>
 
     <h3>Decrypt Numbers</h3>
     <p class="label">Enter Encoded Text:</p>
@@ -59,6 +79,23 @@
     <button onclick="decode()">Decrypt</button>
     <p id="textOutput"></p>
     <script>
+        var keyInput = true;
+
+        document.getElementById("randomKey").addEventListener("click", function () {
+            keyInput = true;
+            document.getElementById("customKeyLabel").style.display = "none";
+            document.getElementById("customKeyInput").style.display = "none";
+            document.getElementById("keyOutput").style.display = "block";
+            document.getElementById("keyOutputLabel").style.display = "block";
+        });
+        document.getElementById("customKey").addEventListener("click", function () {
+            keyInput = false;
+            document.getElementById("customKeyLabel").style.display = "block";
+            document.getElementById("customKeyInput").style.display = "inline-block";
+            document.getElementById("keyOutput").style.display = "none";
+            document.getElementById("keyOutputLabel").style.display = "none";
+        });
+
         function zeroPad(n, w) {
             while (n.toString().length < w) n = '0' + n;
             return n;
@@ -74,11 +111,20 @@
         }
 
         function encode() {
+            var array;
             var nums = "";
             var text = document.getElementById("textInput").value;
             text = text.replace(/[^a-zA-Z0-9 ]/g, "");
             text = text.toLowerCase();
-            var array = randomNum();
+            if (keyInput == true) {
+                array = randomNum();
+            } else if (keyInput == false) {
+                var inputArray = document.getElementById("customKeyInput").value;
+                inputArray = inputArray.split(",");
+                for (var i = 0; i < inputArray.length; i++) {
+                    array += parseInt(inputArray[i]);
+                }
+            }
             for (var i = 0; i < text.length; i++) {
                 if (zeroPad(text.charCodeAt(i), 3) == 32) {
                     nums += array.indexOf(0);
@@ -91,7 +137,7 @@
             }
             nums = nums.slice(0, -1);
             document.getElementById("numberOutput").innerHTML = nums;
-            document.getElementById("codeOutput").innerHTML = array;
+            document.getElementById("keyOutput").innerHTML = array;
             array = undefined;
         }
 
