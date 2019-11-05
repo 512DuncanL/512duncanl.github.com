@@ -33,19 +33,23 @@
         }
 
         .label,
-        .radio {
+        .radioText {
             min-height: 0;
             min-width: 0px;
             border: none;
             margin: 20px auto;
         }
 
-        .radio {
+        .radioText {
             display: inline-block;
         }
 
         #customKeyInput, #customKeyLabel {
             display: none;
+        }
+
+        #randomKey, #customKey {
+            margin: 0;
         }
     </style>
 </head>
@@ -56,10 +60,10 @@
     <h3>Encrypt Text</h3>
     <div>
         <input type="radio" name="keyInput" value="random" checked="checked" id="randomKey">
-        <p class="radio">&nbsp;Random Key</p>
+        <p class="radioText">&nbsp;Random Key</p>
         &nbsp;&nbsp;
         <input type="radio" name="keyInput" value="custom" id="customKey">
-        <p class="radio">&nbsp;Custom Key</p>
+        <p class="radioText">&nbsp;Custom Key</p>
     </div>
     <p class="label">Text Input</p>
     <input type="text" id="textInput">
@@ -111,7 +115,7 @@
         }
 
         function encode() {
-            var array;
+            var array = [];
             var nums = "";
             var text = document.getElementById("textInput").value;
             text = text.replace(/[^a-zA-Z0-9 ]/g, "");
@@ -119,11 +123,7 @@
             if (keyInput == true) {
                 array = randomNum();
             } else if (keyInput == false) {
-                var inputArray = document.getElementById("customKeyInput").value;
-                inputArray = inputArray.split(",");
-                for (var i = 0; i < inputArray.length; i++) {
-                    array += parseInt(inputArray[i]);
-                }
+                array = document.getElementById("customKeyInput").value.split(",").map(Number);
             }
             for (var i = 0; i < text.length; i++) {
                 if (zeroPad(text.charCodeAt(i), 3) == 32) {
