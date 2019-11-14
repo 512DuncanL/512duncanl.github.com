@@ -5,6 +5,7 @@ Site: [https://512duncanl.github.io](https://512duncanl.github.io)
 ## Games
 - [Tic Tac Toe](https://512duncanl.github.io/tic-tac-toe.html): The multiplayer version of tic tac toe
 - [Pong](https://512duncanl.github.io/pong.html): The singleplayer version of pong
+- [Snake](https://512duncanl.github.io/snake.html): With 2 designs: Classic and Modern
 ## Sites
 - [Mycreeper](https://mycreeper.site): A small guide about Minecraft
 - [Brawlalts](https://brawlalts.store): A joint project with emcbandit that sells alts
