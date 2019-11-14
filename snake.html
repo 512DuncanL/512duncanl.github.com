@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link href="https://fonts.googleapis.com/css?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <style>
+        @font-face {
+            font-family: 'ClassicFont';
+            font-style: normal;
+            font-weight: 400;
+            font-display: swap;
+            src: local('Press Start 2P Regular'), local('PressStart2P-Regular'), url(https://fonts.gstatic.com/s/pressstart2p/v8/e3t4euO8T-267oIAQAu6jDQyK3nVivNm4I81.woff2) format('woff2');
+            unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+        }
+
+        body {
+            text-align: center;
+            margin: 0;
+            font-family: "ClassicFont";
+            font-size: 20px;
+            margin: auto;
+            background-color: #1e1e1e;
+            color: #3ae500;
+        }
+
+        p {
+            margin: 10px;
+        }
+
+        canvas {
+            background-color: #1e1e1e;
+            border: 15px solid #3ae500;
+        }
+
+        button {
+            display: block;
+            margin: auto;
+        }
+
+        .radioText {
+            display: inline-block;
+            margin: 10px 0;
+            height: 20px;
+        }
+
+        #classic {
+            display: inline-block;
+            padding: 3px;
+            border: 3px solid #3ae500;
+            margin-right: 15px;
+        }
+
+        #modern {
+            display: inline-block;
+            padding: 5px;
+            border: 3px solid #3ae500;
+        }
+
+        #classicFilling {
+            width: 5px;
+            height: 5px;
+            background-color: #3ae500;
+        }
+
+        #modernFilling {
+            width: 5px;
+            height: 5px;
+            background-color: white;
+            display: none;
+        }
+    </style>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body id="body">
+    <h1>Snake</h1>
+    <p>Score: <span id="score">0</span></p>
+    <p class="radioText">Classic</p>
+    <div id="classic">
+        <div id="classicFilling"></div>
+    </div>
+    <p class="radioText">Modern</p>
+    <div id="modern">
+        <div id="modernFilling"></div>
+    </div>
+    <br>
+    <canvas id="gameCanvas"></canvas>
+    <script>
+        //SETUP
+        const SCORE = document.getElementById("score");
+        const CANVAS = document.getElementById("gameCanvas");
+        const CANVAS_CONTENT = CANVAS.getContext("2d");
+
+        const SNAKE_SPEED = 37.5;
+        const STARTING_SNAKE_LENGTH = 10;
+
+        var snake = []
+        var snakeSize = 8;
+        var snakeColor = "#3ae500";
+        var direction = "right";
+
+        var food;
+        var foodColor = "#3ae500";
+
+        //Setting dimensions of canvas
+        if (window.innerHeight < window.innerWidth) {
+            CANVAS.width = Math.floor((window.innerHeight - 200) / snakeSize) * snakeSize;
+            CANVAS.height = Math.floor((window.innerHeight - 200) / snakeSize) * snakeSize;
+        } else {
+            CANVAS.width = Math.floor((window.innerWidth - 200) / snakeSize) * snakeSize;
+            CANVAS.height = Math.floor((window.innerWidth - 200) / snakeSize) * snakeSize;
+        }
+
+        //Creating Food
+        food = {
+            x: Math.round(Math.random() * (CANVAS.width / snakeSize - 1)),
+            y: Math.round(Math.random() * (CANVAS.height / snakeSize - 1))
+        }
+
+        //Creating Snake
+        for (var i = STARTING_SNAKE_LENGTH - 1; i >= 0; i--) {
+            snake.push({
+                x: i,
+                y: 0
+            });
+        }
+
+        //Listen for keydown to change direction
+        document.addEventListener("keydown", getDirection);
+
+        //Listen for style change
+        document.getElementById("classic").addEventListener("click", function () {
+            foodColor = "#3ae500";
+            snakeColor = "#3ae500";
+            document.getElementById("classic").style.borderColor = "#3ae500";
+            document.getElementById("classic").style.padding = "3px";
+            document.getElementById("modern").style.borderColor = "#3ae500";
+            document.getElementById("modern").style.padding = "5px";
+            document.getElementById("body").style.color = "#3ae500";
+            document.getElementById("body").style.fontFamily = "ClassicFont";
+            document.getElementById("body").style.backgroundColor = "#1e1e1e";
+            document.getElementById("classicFilling").style.display = "block";
+            document.getElementById("modernFilling").style.display = "none";
+            CANVAS.style.borderColor = "#3ae500";
+            CANVAS.style.backgroundColor = "#1e1e1e";
+        });
+        document.getElementById("modern").addEventListener("click", function () {
+            foodColor = "white";
+            snakeColor = "white";
+            document.getElementById("classic").style.borderColor = "white";
+            document.getElementById("classic").style.padding = "5px";
+            document.getElementById("modern").style.borderColor = "white";
+            document.getElementById("modern").style.padding = "3px";
+            document.getElementById("body").style.color = "white";
+            document.getElementById("body").style.fontFamily = "sans-serif";
+            document.getElementById("body").style.backgroundColor = "black";
+            document.getElementById("classicFilling").style.display = "none";
+            document.getElementById("modernFilling").style.display = "block";
+            CANVAS.style.borderColor = "white";
+            CANVAS.style.backgroundColor = "black";
+        });
+
+        //FUNCTIONS
+        function getDirection(event) {
+            if ((event.keyCode == 65 || event.keyCode == 37) && direction != "right") {
+                direction = "left";
+            } else if ((event.keyCode == 87 || event.keyCode == 38) && direction != "down") {
+                direction = "up"
+            } else if ((event.keyCode == 68 || event.keyCode == 39) && direction != "left") {
+                direction = "right"
+            } else if ((event.keyCode == 83 || event.keyCode == 40) && direction != "up") {
+                direction = "down"
+            }
+        }
+
+        function drawFood(x, y, color) {
+            CANVAS_CONTENT.fillStyle = color;
+            CANVAS_CONTENT.fillRect(x * snakeSize, y * snakeSize, snakeSize, snakeSize);
+        }
+
+        function drawSnake(x, y, color) {
+            CANVAS_CONTENT.fillStyle = color;
+            CANVAS_CONTENT.fillRect(x * snakeSize, y * snakeSize, snakeSize, snakeSize);
+        }
+
+        function checkCollision(x, y, array) {
+            for (var i = 0; i < array.length; i++) {
+                if (x == array[i].x && y == array[i].y) {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        function generateFood() {
+            food = {
+                x: Math.round(Math.random() * (CANVAS.width / snakeSize - 1)),
+                y: Math.round(Math.random() * (CANVAS.height / snakeSize - 1))
+            }
+        }
+
+        function drawEverything() {
+            //Clear Canvas
+            CANVAS_CONTENT.clearRect(0, 0, CANVAS.width, CANVAS.height);
+
+            //Draw Snake
+            for (var i = 0; i < snake.length; i++) {
+                var posX = snake[i].x;
+                var posY = snake[i].y;
+                drawSnake(posX, posY, snakeColor);
+            }
+            //Draw Food
+            drawFood(food.x, food.y, foodColor);
+
+            //Original Snake Head
+            var snakeX = snake[0].x;
+            var snakeY = snake[0].y;
+
+            //Changing Positions
+            if (direction == "left") snakeX--;
+            else if (direction == "up") snakeY--;
+            else if (direction == "right") snakeX++;
+            else if (direction == "down") snakeY++;
+
+            //Check for collision
+            if (checkCollision(snakeX, snakeY, snake) == true) {
+                location.reload();
+            }
+
+            //Eating Food
+            if (snakeX == food.x && snakeY == food.y) {
+                //If snake eats food...
+                generateFood();
+                for (var i = 0; i < snake.length; i++) {
+                    while (food.x == snake[i].x && food.y == snake[i].y) {
+                        generateFood();
+                    }
+                }
+            } else {
+                //If snake does not eat food, remove tail
+                snake.pop();
+            }
+
+            //Adding New Head
+            if (snakeX < 0) {
+                snakeX = (CANVAS.width / snakeSize) - 1;
+            } else if (snakeX > (CANVAS.width / snakeSize) - 1) {
+                snakeX = 0;
+            } else if (snakeY < 0) {
+                snakeY = (CANVAS.height / snakeSize) - 1;
+            } else if (snakeY > (CANVAS.height / snakeSize) - 1) {
+                snakeY = 0;
+            }
+
+            var newSnakeHead = {
+                x: snakeX,
+                y: snakeY
+            };
+            snake.unshift(newSnakeHead);
+
+            //Changing Score
+            SCORE.innerHTML = snake.length - STARTING_SNAKE_LENGTH;
+        }
+
+        //MAIN
+        setInterval(drawEverything, SNAKE_SPEED);
+    </script>
+</body>
+
+</html>
