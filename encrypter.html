@@ -163,19 +163,19 @@
             key = key.split(",");
             for (var i = 0; i < number.length; i++) {
                 var char = key[number[i]];
-                if (char == "0") {
+                if (char == 0) {
                     string += " ";
-                } else if (char == "58") {
+                } else if (char == 37) {
                     string += ":";
-                } else if (char == "59") {
+                } else if (char == 38) {
                     string += ";";
-                } else if (char == "63") {
+                } else if (char == 39) {
                     string += "?";
-                } else if (char == "33") {
+                } else if (char == 40) {
                     string += "!";
-                } else if (char == "44") {
+                } else if (char == 41) {
                     string += ",";
-                } else if (char == "46") {
+                } else if (char == 42) {
                     string += ".";
                 } else if (char == "") {
                     string += "";
