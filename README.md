@@ -7,7 +7,7 @@ Site: [https://512duncanl.github.io](https://512duncanl.github.io)
 - [Pong](https://512duncanl.github.io/pong.html): The singleplayer version of pong
 - [Snake](https://512duncanl.github.io/snake.html): With 2 designs: Classic and Modern
 ## Sites
-- [Mycreeper]: A small guide about Minecraft (Hosting Expired)
+- Mycreeper: A small guide about Minecraft (Hosting Expired)
 - [Brawlalts](https://brawlalts.store): A joint project with emcbandit that sells alts
 ## Others
 - [Clicking Speed Test](https://512duncanl.github.io/clicking-speed-test.html): Now with 4 different modes!
