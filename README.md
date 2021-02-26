@@ -9,7 +9,7 @@ Site: [https://512duncanl.github.io](https://512duncanl.github.io)
 ## Sites
 - Mycreeper: A small guide about Minecraft (Expired Hosting)
 - Brawlalts: A joint project with emcbandit that sells alts (Expired Hosting)
-- [EasyGiveaways](https://easygiveaways.xyz): A website for scamming little kids
+- EasyGiveaways: A website for trolling little kids (Expired Hosting)
 ## Others
 - [Clicking Speed Test](https://512duncanl.github.io/clicking-speed-test.html): Now with 4 different modes!
 - [Calculator](https://512duncanl.github.io/calculator.html): Your everyday calculator
