@@ -3,7 +3,7 @@ Site: [https://512duncanl.github.io](https://512duncanl.github.io)
 # 512DuncanL's random web projects
 
 ## Games
-- [Tic Tac Toe](https://512duncanl.github.io/tic-tac-toe.html): The multiplayer version of tic tac toe
+- [Tic Tac Toe](https://512duncanl.github.io/tic-tac-toe.html): A 2 player multiplayer game (Please don't look at the code, this was my first project and it is terrible)
 - [Pong](https://512duncanl.github.io/pong.html): The singleplayer version of pong
 - [Snake](https://512duncanl.github.io/snake.html): With 2 designs: Classic and Modern
 ## Sites
